@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F4EDDC">
+<title>Dayta Analytics — AI legibility for marketing agencies</title>
+<meta name="description" content="We make marketing agencies legible to AI — building the systems that ship the work, instead of hiring around it. Automated reports, anomaly monitoring, and custom chat — by a data engineer who consulted for Fortune 100 companies.">
+<meta property="og:title" content="Dayta Analytics — Scale with AI. Not headcount.">
+<meta property="og:description" content="AI systems that replace the next hire on your roadmap. Built by a data engineer for Fortune 100s and Y-Combinator startups.">
+<meta property="og:image" content="founder.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23F4EDDC%22/><text x=%2250%22 y=%2275%22 text-anchor=%22middle%22 font-family=%22Helvetica%22 font-weight=%22900%22 font-size=%2270%22 fill=%22%230A0908%22>D</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ───────────────────────────────────────────────
+   DESIGN TOKENS
+   ─────────────────────────────────────────────── */
+:root{
+  --paper:#F4EDDC;
+  --paper-2:#EDE4CE;
+  --ink:#0A0908;
+  --ink-soft:#2A2823;
+  --ink-mute:#5A5650;
+  --rule:#0A0908;
+  --hair:rgba(10,9,8,.14);
+  --hair-strong:rgba(10,9,8,.32);
+  --white:#FAF7EE;
+  --accent:#1A3FFF;
+  --accent-deep:#0F2BC7;
+  --highlight:#FFE85C;
+
+  --display:"Fraunces","Times New Roman",serif;
+  --body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono","SF Mono",Menlo,monospace;
+
+  --pad-x: clamp(20px, 5vw, 80px);
+  --pad-y: clamp(60px, 9vw, 140px);
+}
+
+/* ───────────────────────────────────────────────
+   RESET
+   ─────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{
+  font-family:var(--body);
+  font-weight:400;
+  font-size:17px;
+  line-height:1.55;
+  color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  max-width:100vw;
+}
+section, .row, .shell{max-width:100vw;overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;background:none;border:none;cursor:pointer;color:inherit}
+
+/* Subtle paper grain via SVG noise */
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  pointer-events:none;
+  z-index:1;
+  opacity:.035;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size:220px 220px;
+  mix-blend-mode:multiply;
+}
+
+/* ───────────────────────────────────────────────
+   TYPE PRIMITIVES
+   ─────────────────────────────────────────────── */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+  font-weight:500;
+}
+.h-display{
+  font-family:var(--display);
+  font-weight:500;
+  font-variation-settings:"opsz" 144, "SOFT" 30;
+  line-height:.93;
+  letter-spacing:-.025em;
+  color:var(--ink);
+}
+.italic{font-style:italic;font-weight:400}
+
+/* ───────────────────────────────────────────────
+   GLOBAL LAYOUT
+   ─────────────────────────────────────────────── */
+.shell{
+  position:relative;
+  z-index:2;
+}
+.row{
+  padding-left:var(--pad-x);
+  padding-right:var(--pad-x);
+  max-width:1480px;
+  margin-inline:auto;
+}
+section{position:relative}
+.rule{
+  border:none;
+  border-top:1px solid var(--ink);
+  margin:0;
+}
+.rule-soft{border-top-color:var(--hair-strong)}
+
+/* ───────────────────────────────────────────────
+   NAV
+   ─────────────────────────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:var(--paper);
+  border-bottom:1px solid var(--ink);
+}
+.nav-row{
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+}
+.nav-logo{
+  display:flex;align-items:center;
+  height:30px;
+}
+.nav-logo img{height:24px;width:auto}
+.nav-links{
+  display:flex;gap:36px;
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:500;
+}
+.nav-links a{position:relative;padding:6px 0;transition:opacity .2s}
+.nav-links a::after{
+  content:"";
+  position:absolute;left:0;right:100%;bottom:0;
+  height:1px;background:var(--ink);
+  transition:right .25s ease;
+}
+.nav-links a:hover::after{right:0}
+.nav-cta{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:600;
+  padding:9px 16px;
+  border:1px solid var(--ink);
+  background:var(--ink);
+  color:var(--paper);
+  transition:background .2s, color .2s;
+}
+.nav-cta:hover{background:transparent;color:var(--ink)}
+@media (max-width:720px){
+  .nav-links{display:none}
+}
+
+/* ───────────────────────────────────────────────
+   HERO
+   ─────────────────────────────────────────────── */
+.hero{
+  padding-top: clamp(40px, 7vw, 90px);
+  padding-bottom: clamp(60px, 9vw, 120px);
+  border-bottom:1px solid var(--ink);
+  position:relative;
+}
+.hero-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom: clamp(36px, 6vw, 72px);
+  flex-wrap:wrap;gap:8px 24px;
+  min-width:0;
+}
+.hero-meta .left,.hero-meta .right{display:flex;gap:16px;flex-wrap:wrap;min-width:0}
+@media (max-width:480px){
+  .hero-meta span{font-size:10px;letter-spacing:.14em}
+}
+.hero-meta span{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+}
+.hero-meta .dot{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+  margin-right:8px;vertical-align:middle;
+  animation:pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:.55;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.25)}
+}
+
+.hero-h1{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144, "SOFT" 25, "wght" 500;
+  font-size: clamp(56px, 11.5vw, 184px);
+  line-height: .9;
+  letter-spacing:-.035em;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+.hero-h1 em{
+  font-style:italic;
+  font-weight:400;
+  font-variation-settings:"opsz" 144, "SOFT" 90, "wght" 400;
+  color:var(--ink);
+}
+.hero-h1 .pause{display:block}
+.hero-sub{
+  font-family:var(--body);
+  font-size: clamp(18px, 1.7vw, 22px);
+  line-height:1.45;
+  max-width: 720px;
+  color:var(--ink-soft);
+  margin-bottom: clamp(40px, 5vw, 56px);
+  font-weight:400;
+}
+.hero-sub b{
+  background:linear-gradient(transparent 60%, var(--highlight) 60%);
+  font-weight:500;
+  padding:0 2px;
+}
+.hero-ctas{
+  display:flex;flex-wrap:wrap;gap:14px;align-items:center;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);
+  font-size:13px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  padding:18px 28px;
+  border:1px solid var(--ink);
+  transition: transform .12s ease, background .2s ease, color .2s ease;
+}
+.btn .arrow{
+  display:inline-block;
+  transition:transform .25s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:hover .arrow{transform:translateX(4px)}
+.btn-primary{
+  background:var(--ink);
+  color:var(--paper);
+}
+.btn-primary:hover{background:var(--accent);border-color:var(--accent)}
+.btn-ghost{
+  background:transparent;
+}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+/* Hero corner stamp */
+.hero-stamp{
+  position:absolute;
+  right: var(--pad-x);
+  bottom: clamp(40px, 6vw, 80px);
+  transform:rotate(-4deg);
+  border:1.5px solid var(--ink);
+  padding:14px 18px;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  line-height:1.5;
+  background:var(--paper);
+  text-align:center;
+}
+.hero-stamp .big{
+  font-family:var(--display);
+  font-size:32px;
+  font-style:italic;
+  font-weight:500;
+  letter-spacing:-.02em;
+  text-transform:none;
+  display:block;
+  margin: 4px 0;
+}
+@media (max-width:980px){.hero-stamp{display:none}}
+
+/* ───────────────────────────────────────────────
+   PLAYBOOK STORY
+   ─────────────────────────────────────────────── */
+.story{
+  background:var(--ink);
+  color:var(--paper);
+  padding: clamp(70px, 9vw, 130px) 0;
+  position:relative;
+  overflow:hidden;
+}
+.story::before{
+  content:"";
+  position:absolute;inset:0;
+  background-image:radial-gradient(rgba(244,237,220,.06) 1px, transparent 1px);
+  background-size:24px 24px;
+  pointer-events:none;
+}
+.story-inner{
+  display:grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items:start;
+  position:relative;
+}
+.story-eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--paper-2);
+  opacity:.6;
+  margin-bottom:24px;
+  display:flex;align-items:center;gap:14px;
+}
+.story-eyebrow::before{
+  content:"";display:inline-block;
+  width:36px;height:1px;background:var(--paper);opacity:.5;
+}
+.story h2{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144, "SOFT" 30, "wght" 400;
+  font-size: clamp(30px, 5.4vw, 76px);
+  line-height:1.04;
+  letter-spacing:-.022em;
+  margin-bottom: 28px;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+  max-width: 100%;
+}
+.story h2 em{
+  font-style:italic;
+  font-variation-settings:"opsz" 144, "SOFT" 100, "wght" 400;
+  color:var(--paper);
+}
+.hero-h1, .section-head h2, .quote blockquote, .founder h2, .cta h2{
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+.story-body{
+  font-family:var(--body);
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height:1.65;
+  color:var(--paper-2);
+  max-width: 540px;
+  font-weight:300;
+}
+.story-body p+p{margin-top:18px}
+.story-attr{
+  margin-top:32px;
+  display:flex;align-items:center;gap:14px;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  opacity:.7;
+}
+.story-attr::before{
+  content:"·";opacity:.6;
+}
+.story-stats{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1px;
+  background:rgba(244,237,220,.18);
+  border:1px solid rgba(244,237,220,.18);
+}
+.stat{
+  background:var(--ink);
+  padding: clamp(28px, 3.5vw, 48px) clamp(24px, 3vw, 40px);
+  display:flex;flex-direction:column;gap:8px;
+}
+.stat-num{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144, "SOFT" 50, "wght" 500;
+  font-size: clamp(64px, 8vw, 112px);
+  line-height:.9;
+  letter-spacing:-.04em;
+  color:var(--paper);
+  display:flex;align-items:baseline;gap:6px;
+}
+.stat-num .unit{
+  font-family:var(--mono);
+  font-size:14px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-weight:500;
+  font-variation-settings:normal;
+  color:var(--paper-2);
+  opacity:.7;
+  align-self:flex-start;
+  margin-left:4px;
+  margin-top:8px;
+}
+.stat-label{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--paper-2);
+  opacity:.7;
+}
+.stat .sub{
+  font-family:var(--body);
+  font-size:14px;
+  color:var(--paper-2);
+  opacity:.6;
+  font-weight:300;
+  margin-top:4px;
+}
+@media (max-width:880px){
+  .story-inner{grid-template-columns:1fr;gap:48px}
+}
+
+/* ───────────────────────────────────────────────
+   AUTHORITY STRIP
+   ─────────────────────────────────────────────── */
+.authority{
+  border-bottom:1px solid var(--ink);
+  padding: clamp(40px, 5vw, 56px) 0;
+}
+.authority-row{
+  display:flex;justify-content:space-between;align-items:center;gap:32px;
+  flex-wrap:wrap;
+}
+.authority-headline{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144, "SOFT" 30, "wght" 400;
+  font-style:italic;
+  font-size: clamp(18px, 2vw, 26px);
+  line-height:1.25;
+  letter-spacing:-.015em;
+  max-width:520px;
+}
+.authority-stats{
+  display:flex;gap:48px;align-items:center;
+}
+.authority-stat{
+  display:flex;flex-direction:column;gap:2px;text-align:right;
+}
+.authority-stat .n{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 500;
+  font-size: clamp(26px, 2.6vw, 36px);
+  line-height:1;
+  letter-spacing:-.02em;
+}
+.authority-stat .l{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+  margin-top:6px;
+}
+@media (max-width:760px){
+  .authority-stats{justify-content:flex-start;gap:32px}
+  .authority-stat{text-align:left}
+}
+
+/* ───────────────────────────────────────────────
+   SECTION HEADER
+   ─────────────────────────────────────────────── */
+.section{
+  padding: var(--pad-y) 0;
+  border-bottom:1px solid var(--ink);
+}
+.section-head{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  gap: clamp(24px, 4vw, 80px);
+  margin-bottom: clamp(48px, 6vw, 80px);
+  align-items:end;
+}
+.section-head .label{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+  display:flex;align-items:center;gap:12px;
+}
+.section-head .label::before{
+  content:"";display:inline-block;
+  width:28px;height:1px;background:var(--ink);
+}
+.section-head h2{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 500;
+  font-size: clamp(40px, 5.8vw, 84px);
+  line-height: .98;
+  letter-spacing:-.03em;
+}
+.section-head h2 em{
+  font-style:italic;
+  font-variation-settings:"opsz" 144,"SOFT" 100,"wght" 400;
+}
+@media (max-width:780px){
+  .section-head{grid-template-columns:1fr;gap:18px}
+}
+
+/* ───────────────────────────────────────────────
+   FEATURES
+   ─────────────────────────────────────────────── */
+.features{
+  border-top:1px solid var(--ink);
+}
+.feature{
+  display:grid;
+  grid-template-columns: 80px 1.4fr 1.6fr;
+  gap: clamp(20px, 3vw, 56px);
+  padding: clamp(40px, 5vw, 72px) 0;
+  border-bottom:1px solid var(--hair-strong);
+  align-items:start;
+  transition: background .3s ease;
+}
+.feature:hover{background: rgba(10,9,8,.025)}
+.feature:last-child{border-bottom:none}
+.feature .idx{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 25,"wght" 500;
+  font-style:italic;
+  font-size: clamp(38px, 4.2vw, 60px);
+  line-height:.9;
+  letter-spacing:-.02em;
+  color:var(--ink);
+}
+.feature h3{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 500;
+  font-size: clamp(28px, 3.4vw, 46px);
+  line-height:1.03;
+  letter-spacing:-.024em;
+}
+.feature h3 em{
+  font-style:italic;
+  font-variation-settings:"opsz" 144,"SOFT" 100,"wght" 400;
+}
+.feature-body{display:flex;flex-direction:column;gap:18px}
+.feature-body p{
+  font-family:var(--body);
+  font-size: clamp(15px, 1.15vw, 17px);
+  line-height:1.6;
+  color:var(--ink-soft);
+  font-weight:400;
+  max-width:560px;
+}
+.feature-replaces{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-top:8px;
+}
+.feature-replaces .tag{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:500;
+  color:var(--ink-mute);
+  padding:6px 10px;
+  border:1px solid var(--hair-strong);
+  border-radius:999px;
+}
+.feature-replaces .label{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+  align-self:center;
+  margin-right:4px;
+}
+@media (max-width:880px){
+  .feature{grid-template-columns:1fr; gap:14px}
+  .feature .idx{font-size:34px}
+}
+
+/* ───────────────────────────────────────────────
+   WORK SAMPLE
+   ─────────────────────────────────────────────── */
+.work{
+  background:var(--paper-2);
+  border-top:1px solid var(--ink);
+  border-bottom:1px solid var(--ink);
+  padding: var(--pad-y) 0;
+  overflow:hidden;
+  position:relative;
+}
+.work-frame{
+  margin-top:48px;
+  position:relative;
+  perspective:2200px;
+}
+.browser{
+  background:var(--white);
+  border:1px solid var(--ink);
+  border-radius:14px;
+  box-shadow: 28px 28px 0 var(--ink);
+  overflow:hidden;
+  max-width:1080px;
+  margin-inline:auto;
+  transform: rotateX(2deg) rotateY(-3deg);
+  transition: transform .6s ease;
+}
+@media (max-width: 880px){
+  .browser{
+    box-shadow: 10px 10px 0 var(--ink);
+    transform: none;
+    border-radius:10px;
+  }
+  .work-frame{margin-right:12px;margin-left:0}
+}
+.browser:hover{transform: rotateX(0deg) rotateY(0deg)}
+.browser-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:12px 16px;
+  border-bottom:1px solid var(--hair-strong);
+  background:var(--paper);
+}
+.browser-bar .dots{display:flex;gap:6px}
+.browser-bar .dots span{
+  width:11px;height:11px;border-radius:50%;
+  background:var(--ink);opacity:.18;
+}
+.browser-bar .url{
+  margin-left:auto;margin-right:auto;
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-mute);
+  background:var(--paper-2);
+  padding:4px 14px;border-radius:999px;
+  border:1px solid var(--hair);
+}
+.browser img{
+  width:100%;
+  display:block;
+}
+.work-caption{
+  margin-top:32px;text-align:center;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+}
+
+/* ───────────────────────────────────────────────
+   TESTIMONIALS
+   ─────────────────────────────────────────────── */
+.quotes{
+  padding: var(--pad-y) 0;
+  border-bottom:1px solid var(--ink);
+}
+.quote{
+  display:grid;
+  grid-template-columns: 80px 1fr;
+  gap: clamp(20px, 3vw, 48px);
+  padding: clamp(36px, 4.5vw, 64px) 0;
+  border-top:1px solid var(--hair-strong);
+  position:relative;
+}
+.quote:first-of-type{border-top:none;padding-top:0}
+.quote .mark{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 100,"wght" 400;
+  font-style:italic;
+  font-size: clamp(80px, 9vw, 140px);
+  line-height:.6;
+  color:var(--ink);
+  user-select:none;
+}
+.quote blockquote{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 50,"wght" 400;
+  font-size: clamp(22px, 2.6vw, 38px);
+  line-height:1.18;
+  letter-spacing:-.018em;
+  color:var(--ink);
+  margin-bottom:24px;
+  max-width:880px;
+}
+.quote blockquote em{
+  font-style:italic;
+  font-variation-settings:"opsz" 144,"SOFT" 100,"wght" 400;
+}
+.quote-attr{
+  display:flex;align-items:center;gap:14px;
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+}
+.quote-attr .name{color:var(--ink);font-weight:600}
+.quote-attr .div{
+  display:inline-block;width:18px;height:1px;background:var(--ink-mute);
+}
+@media (max-width:780px){
+  .quote{grid-template-columns:1fr;gap:0}
+}
+
+/* ───────────────────────────────────────────────
+   FOUNDER / ABOUT
+   ─────────────────────────────────────────────── */
+.founder{
+  background:var(--paper-2);
+  border-bottom:1px solid var(--ink);
+  padding: var(--pad-y) 0;
+}
+.founder-inner{
+  display:grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items:start;
+}
+.founder-photo{
+  position:relative;
+  border:1px solid var(--ink);
+  background:var(--ink);
+  overflow:hidden;
+}
+.founder-photo img{
+  width:100%;height:auto;display:block;
+  filter:grayscale(0%);
+  transition:filter .6s ease;
+}
+.founder-photo:hover img{filter:grayscale(0%) contrast(1.05)}
+.founder-photo .badge{
+  position:absolute;
+  bottom:18px;left:18px;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--paper);
+  background:var(--ink);
+  padding:8px 12px;
+  border:1px solid var(--paper);
+  border-radius:2px;
+}
+.founder-label{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+  margin-bottom:18px;
+  display:flex;align-items:center;gap:12px;
+}
+.founder-label::before{
+  content:"";width:28px;height:1px;background:var(--ink);
+}
+.founder h2{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 500;
+  font-size: clamp(34px, 4.2vw, 56px);
+  line-height:1.02;
+  letter-spacing:-.025em;
+  margin-bottom:28px;
+}
+.founder h2 em{
+  font-style:italic;
+  font-variation-settings:"opsz" 144,"SOFT" 100,"wght" 400;
+}
+.founder-bio p{
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.62;
+  color:var(--ink-soft);
+}
+.founder-bio p+p{margin-top:18px}
+.founder-creds{
+  margin-top:32px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  padding-top:28px;
+  border-top:1px solid var(--hair-strong);
+}
+.cred{display:flex;flex-direction:column;gap:4px}
+.cred .v{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 500;
+  font-size:22px;
+  letter-spacing:-.02em;
+  line-height:1.1;
+}
+.cred .k{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+}
+.founder-links{
+  margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;
+}
+.founder-links a{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:600;
+  padding:10px 16px;
+  border:1px solid var(--ink);
+  transition: background .2s, color .2s;
+}
+.founder-links a:hover{background:var(--ink);color:var(--paper)}
+@media (max-width:880px){
+  .founder-inner{grid-template-columns:1fr}
+}
+
+/* ───────────────────────────────────────────────
+   CTA / CONTACT
+   ─────────────────────────────────────────────── */
+.cta{
+  background:var(--ink);
+  color:var(--paper);
+  padding: clamp(70px, 10vw, 140px) 0 clamp(60px, 8vw, 100px);
+  position:relative;
+  overflow:hidden;
+}
+.cta::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(rgba(244,237,220,.05) 1px, transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;
+}
+.cta-inner{
+  position:relative;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items:start;
+}
+.cta-side-l{display:flex;flex-direction:column;gap:24px}
+.cta-eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--paper-2);
+  opacity:.6;
+  display:flex;align-items:center;gap:12px;
+}
+.cta-eyebrow::before{
+  content:"";width:28px;height:1px;background:var(--paper);opacity:.5;
+}
+.cta h2{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 25,"wght" 500;
+  font-size: clamp(60px, 9vw, 140px);
+  line-height:.88;
+  letter-spacing:-.04em;
+}
+.cta h2 em{
+  font-style:italic;
+  font-variation-settings:"opsz" 144,"SOFT" 100,"wght" 400;
+}
+.cta-lede{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 50,"wght" 400;
+  font-style:italic;
+  font-size: clamp(20px, 1.8vw, 26px);
+  line-height:1.35;
+  max-width: 460px;
+  color:var(--paper-2);
+}
+.cta-trust{
+  display:flex;flex-direction:column;gap:12px;
+  margin-top:16px;
+  padding-top:24px;
+  border-top:1px solid rgba(244,237,220,.18);
+}
+.cta-trust .item{
+  display:flex;align-items:flex-start;gap:14px;
+  font-family:var(--body);
+  font-size:14px;
+  line-height:1.5;
+  color:var(--paper-2);
+  font-weight:300;
+}
+.cta-trust .item .check{
+  display:inline-block;
+  flex:0 0 16px;
+  width:16px;height:16px;
+  border:1px solid var(--paper-2);
+  border-radius:50%;
+  position:relative;
+  margin-top:3px;
+  opacity:.7;
+}
+.cta-trust .item .check::after{
+  content:"";
+  position:absolute;
+  left:4px;top:1px;
+  width:5px;height:9px;
+  border:solid var(--paper-2);
+  border-width:0 1.5px 1.5px 0;
+  transform:rotate(45deg);
+}
+
+/* Form */
+.lead-form{
+  background:var(--paper);
+  color:var(--ink);
+  padding: clamp(28px, 3.5vw, 44px);
+  border:1px solid var(--paper-2);
+  position:relative;
+  box-shadow: 12px 12px 0 rgba(244,237,220,.12);
+}
+.form-head{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+  margin-bottom:24px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.form-head .badge{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--ink);
+}
+.form-head .badge .live-dot{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+  animation:pulse 2.2s ease-in-out infinite;
+}
+.field{
+  display:flex;flex-direction:column;gap:8px;
+  margin-bottom:18px;
+}
+.field label{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+  font-weight:500;
+}
+.field input,.field textarea{
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.5;
+  color:var(--ink);
+  background:transparent;
+  border:none;
+  border-bottom:1.5px solid var(--ink);
+  padding:10px 0 12px;
+  outline:none;
+  border-radius:0;
+  width:100%;
+  transition:border-color .2s;
+  resize:none;
+}
+.field textarea{min-height:84px;padding-top:6px}
+.field input::placeholder,.field textarea::placeholder{
+  color:var(--ink-mute);
+  opacity:.55;
+}
+.field input:focus,.field textarea:focus{
+  border-bottom-color:var(--accent);
+}
+.field input:focus+.focus-line,.field textarea:focus+.focus-line{transform:scaleX(1)}
+.form-honey{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.form-submit{
+  margin-top:8px;
+  width:100%;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--mono);
+  font-size:13px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:600;
+  padding:20px 28px;
+  border:1px solid var(--ink);
+  background:var(--ink);
+  color:var(--paper);
+  cursor:pointer;
+  transition: transform .15s ease, background .2s, border-color .2s, color .2s;
+}
+.form-submit:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-1px)}
+.form-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.form-submit .arrow{transition:transform .25s}
+.form-submit:hover .arrow{transform:translateX(4px)}
+.form-foot{
+  margin-top:18px;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+  text-align:center;
+}
+.form-foot a{color:var(--ink);border-bottom:1px solid var(--hair-strong)}
+.form-foot a:hover{border-bottom-color:var(--accent);color:var(--accent)}
+.form-success{
+  display:none;
+  text-align:center;
+  padding:32px 8px;
+}
+.form-success.show{display:block;animation:fadeIn .6s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.form-success .check-big{
+  width:48px;height:48px;border:1.5px solid var(--ink);border-radius:50%;
+  margin:0 auto 18px;display:grid;place-items:center;
+}
+.form-success .check-big::after{
+  content:"";
+  width:10px;height:18px;border:solid var(--ink);border-width:0 2px 2px 0;
+  transform:rotate(45deg) translate(-2px,-2px);
+}
+.form-success h3{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 500;
+  font-style:italic;
+  font-size:32px;
+  letter-spacing:-.02em;
+  margin-bottom:12px;
+}
+.form-success p{
+  font-family:var(--body);
+  font-size:14px;
+  color:var(--ink-soft);
+  line-height:1.55;
+}
+.form-error{
+  display:none;
+  margin-top:12px;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#b8331a;
+  text-align:center;
+}
+.form-error.show{display:block}
+@media (max-width:880px){
+  .cta-inner{grid-template-columns:1fr;gap:48px}
+  .lead-form{box-shadow:none}
+}
+
+/* ───────────────────────────────────────────────
+   FOOTER
+   ─────────────────────────────────────────────── */
+footer{
+  background:var(--ink);
+  color:var(--paper-2);
+  padding: clamp(24px, 3vw, 36px) 0;
+  border-top:1px solid rgba(244,237,220,.18);
+}
+.foot-row{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:20px;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.foot-row .links{display:flex;gap:24px}
+.foot-row .links a{opacity:.7;transition:opacity .2s}
+.foot-row .links a:hover{opacity:1}
+
+/* ───────────────────────────────────────────────
+   SCROLL REVEAL
+   ─────────────────────────────────────────────── */
+.reveal{
+  opacity:0;
+  transform: translateY(28px);
+  transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.08s}
+.reveal.d2{transition-delay:.16s}
+.reveal.d3{transition-delay:.24s}
+.reveal.d4{transition-delay:.32s}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- ─── NAV ──────────────────────────────────── -->
+<header class="nav">
+  <div class="row nav-row">
+    <a href="#top" class="nav-logo" aria-label="Dayta Analytics">
+      <img src="logo.png" alt="DAYTA" />
+    </a>
+    <nav class="nav-links" aria-label="primary">
+      <a href="#features">Services</a>
+      <a href="#work">Work</a>
+      <a href="#founder">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Start the conversation →</a>
+  </div>
+</header>
+
+<!-- ─── HERO ─────────────────────────────────── -->
+<section class="hero" id="top">
+  <div class="row">
+    <div class="hero-meta reveal">
+      <div class="left">
+        <span><span class="dot"></span>Now booking · Q3 2026</span>
+      </div>
+      <div class="right">
+        <span>Est. Jan 2024</span>
+        <span>Vol. 02</span>
+      </div>
+    </div>
+
+    <h1 class="hero-h1 reveal d1">
+      Scale with AI.<span class="pause"><em>Not headcount.</em></span>
+    </h1>
+
+    <p class="hero-sub reveal d2">
+      We make marketing agencies <b>legible to AI</b>, building the systems that ship the work instead of hiring around it. A boutique consultancy for operators who want to grow without growing the org chart.
+    </p>
+
+    <div class="hero-ctas reveal d3">
+      <a href="#contact" class="btn btn-primary">
+        Start the conversation <span class="arrow">→</span>
+      </a>
+      <a href="#features" class="btn btn-ghost">
+        See what we build <span class="arrow">↓</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stamp reveal d4" aria-hidden="true">
+    Volume 02 / Issue 05<br>
+    <span class="big">Dayta</span>
+    Edition 2026
+  </div>
+</section>
+
+<!-- ─── PLAYBOOK STORY ───────────────────────── -->
+<section class="story">
+  <div class="row story-inner">
+    <div>
+      <div class="story-eyebrow">We've run this playbook</div>
+      <h2 class="reveal">I built <em>this</em> agency the same way.</h2>
+      <div class="story-body reveal d1">
+        <p>Dayta started as a typical service business: five subcontractors, an assistant, work bottlenecked by people. So I ran the playbook on myself.</p>
+        <p>I made every process legible to AI: structured the data, defined the outputs, replaced the team with systems. Revenue tripled. Headcount went to one.</p>
+        <p>Now we run it for marketing agencies. Same playbook. Same outcome.</p>
+      </div>
+      <div class="story-attr reveal d2">Landon Colvig · Founder</div>
+    </div>
+
+    <div class="story-stats reveal d2">
+      <div class="stat">
+        <div class="stat-num">3<span class="unit">× rev</span></div>
+        <div class="stat-label">Revenue growth</div>
+        <div class="sub">Same operator. Same hours. Different stack.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">6→1<span class="unit">team</span></div>
+        <div class="stat-label">Headcount shift</div>
+        <div class="sub">Five subcontractors and an assistant, consolidated into AI workflows.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">0<span class="unit">hires</span></div>
+        <div class="stat-label">Net new payroll</div>
+        <div class="sub">Every growth lever pulled by software, not staffing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AUTHORITY STRIP ──────────────────────── -->
+<section class="authority">
+  <div class="row authority-row">
+    <p class="authority-headline reveal">
+      Reporting &amp; analytics built from scratch for <em>Fortune&nbsp;100 retailers</em> and <em>Y-Combinator startups.</em>
+    </p>
+    <div class="authority-stats">
+      <div class="authority-stat reveal d1">
+        <div class="n">100+</div>
+        <div class="l">Businesses onboarded</div>
+      </div>
+      <div class="authority-stat reveal d2">
+        <div class="n">10+</div>
+        <div class="l">Client-facing reports built</div>
+      </div>
+      <div class="authority-stat reveal d3">
+        <div class="n">2024</div>
+        <div class="l">Founded</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURES ─────────────────────────────── -->
+<section class="section features" id="features">
+  <div class="row">
+    <div class="section-head">
+      <div class="label reveal">What we build</div>
+      <h2 class="reveal d1">Three systems that <em>replace</em> the next hire on your roadmap.</h2>
+    </div>
+
+    <div class="feature reveal">
+      <div class="idx">01</div>
+      <div>
+        <h3>Automated <em>branded</em> reports.</h3>
+      </div>
+      <div class="feature-body">
+        <p>Client-facing performance reports that build, brand, and ship themselves. White-labeled to your agency, regenerated on a schedule, delivered straight into your client's inbox. The version of "reporting" that doesn't require a Monday-morning analyst.</p>
+        <p>Pulls from Triple Whale, Hyros, Meta, Google, GA4, server-side conversions (whatever data your clients care about), and writes the narrative around it.</p>
+        <div class="feature-replaces">
+          <span class="label">Replaces</span>
+          <span class="tag">Reporting analyst</span>
+          <span class="tag">Looker Studio babysitting</span>
+          <span class="tag">"Send me the deck"</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature reveal">
+      <div class="idx">02</div>
+      <div>
+        <h3>AI anomaly <em>monitoring</em>.</h3>
+      </div>
+      <div class="feature-body">
+        <p>An AI that watches every paid account, every funnel, every attribution model, and tells you when something quietly broke. Spend doubled three days ago? Conversion rate drifting on the new audience? You hear about it before the client does.</p>
+        <p>Replaces the daily-dashboard-scroll ritual. Replaces "I should have caught that on Tuesday." Replaces the senior account manager who used to notice these things.</p>
+        <div class="feature-replaces">
+          <span class="label">Replaces</span>
+          <span class="tag">Daily dashboard scroll</span>
+          <span class="tag">Senior account manager pattern-matching</span>
+          <span class="tag">Monday-morning surprises</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature reveal">
+      <div class="idx">03</div>
+      <div>
+        <h3>Custom AI <em>chat layer</em>.</h3>
+      </div>
+      <div class="feature-body">
+        <p>Drop a chat interface into your client portal, or into Slack, that actually knows their data. Your clients ask, "Why did CAC spike last week?" and get a real answer drawn from their pixel, their CRM, their ad accounts. Not a generic LLM. Their numbers.</p>
+        <p>Built on the same architecture we use for industrial operators querying live sensor telemetry, then re-engineered for marketing performance.</p>
+        <div class="feature-replaces">
+          <span class="label">Replaces</span>
+          <span class="tag">"Can someone pull this for me?"</span>
+          <span class="tag">Strategist Q&amp;A calls</span>
+          <span class="tag">Client-side data anxiety</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WORK SAMPLE ──────────────────────────── -->
+<section class="work" id="work">
+  <div class="row">
+    <div class="section-head">
+      <div class="label reveal">A sample of the work</div>
+      <h2 class="reveal d1">An <em>agency-grade</em> reporting layer your clients will think you built in-house.</h2>
+    </div>
+
+    <div class="work-frame reveal d2">
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="url">app.client-portal.com / revenue-ops</div>
+        </div>
+        <img src="dashboard.png?v=2" alt="Sample Dayta client portal: agency-grade revenue and attribution analytics">
+      </div>
+      <div class="work-caption">Sample · Client-facing revenue ops dashboard · Auto-generated, white-labeled, refreshed live.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─────────────────────────── -->
+<section class="quotes">
+  <div class="row">
+    <div class="section-head">
+      <div class="label reveal">In their words</div>
+      <h2 class="reveal d1">What partners <em>say</em>.</h2>
+    </div>
+
+    <div class="quote reveal">
+      <div class="mark">"</div>
+      <div>
+        <blockquote>
+          Dayta Analytics transformed our internal reporting processes — helping us to <em>dramatically lower our CAC</em>.
+        </blockquote>
+        <div class="quote-attr">
+          <span class="name">Nick</span>
+          <span class="div"></span>
+          <span>The Zenith Collective</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote reveal d1">
+      <div class="mark">"</div>
+      <div>
+        <blockquote>
+          Impressive skills and collaboration. Landon executed a data visualization project for us, and early on made a <em>critical recommendation</em> that helped us set the right foundation for managing our data.
+        </blockquote>
+        <div class="quote-attr">
+          <span class="name">Lindsay</span>
+          <span class="div"></span>
+          <span>Mass Culture</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOUNDER / ABOUT ──────────────────────── -->
+<section class="founder" id="founder">
+  <div class="row founder-inner">
+    <div class="founder-photo reveal">
+      <img src="founder.jpg" alt="Landon Colvig, Founder of Dayta Analytics">
+      <div class="badge">Landon Colvig · Founder</div>
+    </div>
+
+    <div>
+      <div class="founder-label reveal">About</div>
+      <h2 class="reveal d1">
+        Founder-led. Built by a <em>data engineer</em> who's consulted for Fortune 100 companies.
+      </h2>
+      <div class="founder-bio reveal d2">
+        <p>Before founding Dayta, I built reporting and analytics infrastructure from scratch for Fortune 100 retailers and Y-Combinator-backed startups. The layer underneath the systems most operators never see.</p>
+        <p>Dayta Analytics is a project-based consultancy helping marketing agencies elevate client-facing reports, layer in advanced attribution beyond Triple Whale and Hyros, and automate the manual data and admin work that quietly bottlenecks growth.</p>
+        <p>Founded January 2024. Headquartered nowhere. Built remote.</p>
+      </div>
+
+      <div class="founder-creds reveal d3">
+        <div class="cred">
+          <div class="v">Fortune 100</div>
+          <div class="k">Past clients</div>
+        </div>
+        <div class="cred">
+          <div class="v">Y-Combinator</div>
+          <div class="k">Past clients</div>
+        </div>
+        <div class="cred">
+          <div class="v">Data engineer</div>
+          <div class="k">Discipline</div>
+        </div>
+        <div class="cred">
+          <div class="v">2024</div>
+          <div class="k">Founded</div>
+        </div>
+      </div>
+
+      <div class="founder-links reveal d4">
+        <a href="https://linkedin.com/in/landoncolvig" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="https://instagram.com/landoncolvig" target="_blank" rel="noopener">Instagram ↗</a>
+        <a href="https://card.daytanalytics.com" target="_blank" rel="noopener">Contact card ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA / LEAD FORM ──────────────────────── -->
+<section class="cta" id="contact">
+  <div class="row cta-inner">
+    <div class="cta-side-l reveal">
+      <div class="cta-eyebrow">Start the conversation</div>
+      <h2>Let's <em>talk</em>.</h2>
+      <p class="cta-lede">Tell me what you're trying to scale. I'll come back with a real read: what an AI system would look like, what it would replace, and what it would cost. Usually within 24 hours.</p>
+
+      <div class="cta-trust">
+        <div class="item"><span class="check"></span><span>Personally read &amp; replied to by Landon. No SDR, no funnel.</span></div>
+        <div class="item"><span class="check"></span><span>Free 30-minute scoping call if there's a fit. No pitch deck.</span></div>
+        <div class="item"><span class="check"></span><span>If we're not the right partner, I'll tell you who is.</span></div>
+      </div>
+    </div>
+
+    <div class="reveal d1">
+      <form class="lead-form" id="leadForm" action="https://formsubmit.co/landon@daytanalytics.com" method="POST">
+        <div class="form-head">
+          <span>Inquiry · 002</span>
+          <span class="badge"><span class="live-dot"></span>Replying today</span>
+        </div>
+
+        <!-- Formsubmit.co configuration -->
+        <input type="hidden" name="_subject" value="New lead from daytanalytics.com">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://daytanalytics.com/?sent=1">
+        <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off">
+
+        <div id="formFields">
+          <div class="field">
+            <label for="lf_name">Name</label>
+            <input id="lf_name" type="text" name="Name" placeholder="What should I call you?" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="lf_email">Email</label>
+            <input id="lf_email" type="email" name="Email" placeholder="you@youragency.com" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="lf_company">Agency / Company</label>
+            <input id="lf_company" type="text" name="Company" placeholder="Your agency name" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="lf_msg">What are you trying to scale?</label>
+            <textarea id="lf_msg" name="Message" placeholder="Reporting? Attribution? Client comms? The next hire you'd love to skip?" rows="3" required></textarea>
+          </div>
+
+          <button type="submit" class="form-submit" id="formSubmit">
+            Send <span class="arrow">→</span>
+          </button>
+          <div class="form-error" id="formError">Something went wrong. Email landon@daytanalytics.com directly.</div>
+          <div class="form-foot">
+            Prefer email? <a href="mailto:landon@daytanalytics.com">landon@daytanalytics.com</a>
+          </div>
+        </div>
+
+        <div class="form-success" id="formSuccess">
+          <div class="check-big" aria-hidden="true"></div>
+          <h3>Got it.</h3>
+          <p>I'll get back to you within 24 hours, usually faster. Check your inbox for a confirmation.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────── -->
+<footer>
+  <div class="row foot-row">
+    <div>© 2026 Dayta Analytics LLC</div>
+    <div class="links">
+      <a href="mailto:landon@daytanalytics.com">landon@daytanalytics.com</a>
+      <a href="mailto:info@daytanalytics.com">info@daytanalytics.com</a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /.shell -->
+
+<script>
+// Smooth scroll-triggered reveal
+const io = new IntersectionObserver((entries) => {
+  for (const e of entries){
+    if (e.isIntersecting){
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  }
+},{rootMargin:"0px 0px -10% 0px", threshold:.05});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Lead form — native fetch submit so user stays on page
+const form = document.getElementById('leadForm');
+const submitBtn = document.getElementById('formSubmit');
+const fields = document.getElementById('formFields');
+const success = document.getElementById('formSuccess');
+const errorEl = document.getElementById('formError');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  errorEl.classList.remove('show');
+  submitBtn.disabled = true;
+  submitBtn.querySelector('.arrow').textContent = '…';
+  try{
+    const fd = new FormData(form);
+    const res = await fetch(form.action, {
+      method:'POST',
+      body: fd,
+      headers: {'Accept':'application/json'}
+    });
+    if (!res.ok) throw new Error('bad response');
+    fields.style.display = 'none';
+    success.classList.add('show');
+    // basic conversion event for any analytics that listen later
+    window.dispatchEvent(new CustomEvent('lead-submitted'));
+  } catch(err){
+    submitBtn.disabled = false;
+    submitBtn.querySelector('.arrow').textContent = '→';
+    errorEl.classList.add('show');
+  }
+});
+
+// Honor `?sent=1` (Formsubmit fallback redirect) by scrolling to thank-you
+if (new URLSearchParams(location.search).get('sent') === '1'){
+  fields.style.display = 'none';
+  success.classList.add('show');
+  document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
