@@ -1,5 +1,38 @@
 # Project History
 
+## 2026-06-08 16:05 — Added /privacy and /terms pages for Intuit OAuth review
+
+### Issue / Task
+DAYTA-4 + DAYTA-5: needed real Privacy Policy and EULA pages at `daytanalytics.com/privacy` and `/terms` to submit on the Intuit Developer Portal App Assessment form (and equivalent fields for Clio / RingCentral) for the DeChant Law QBO Data Extraction app registration.
+
+### Actions Taken
+1. Confirmed live host = GitHub Pages serving from `landoncolvig/dayta-site` (not Hostinger / not Squarespace despite domain registrar). `~/Documents/dayta-site/` is the source of truth; `~/Documents/dayta-website/` is an older stub.
+2. Asked Landon for state of incorporation → **Texas** (used in Terms governing-law clause).
+3. Wrote two new pages as `privacy/index.html` and `terms/index.html` (folder form so extensionless `/privacy` and `/terms` URLs resolve regardless of Jekyll being on/off).
+4. Both pages reuse the index.html design tokens inline (Fraunces / IBM Plex Sans / Plex Mono; paper `#F4EDDC`, ink `#0A0908`, accent `#1A3FFF`; SVG paper-grain overlay; sticky nav; black footer).
+5. New layout primitive: sticky-TOC + prose column. `.toc` becomes a wrap on mobile.
+6. Privacy content: who we are, what we collect, third-party OAuth data (called out QBO / Clio / RingCentral / GHL / GCP explicitly), how we use it, no-sale clause, sharing list (Stripe, Google Workspace, AI providers), GCP-US storage + Secret Manager, retention, user rights, no tracking pixels.
+7. Terms content: acceptance, services, SOWs, acceptable use (incl. no PHI / PAN without separate BAA), third-party credentials, IP (Client Materials vs Deliverables vs Dayta Tools), confidentiality, fees (Stripe, 1.5%/mo late interest, suspend at 30d, taxes), AS-IS warranty disclaimer (uppercase block), liability cap = 12 months of fees paid, indemnification (mutual), termination, **Texas governing law + venue**, changes, misc (independent contractor, assignment, notices, force majeure, severability, entire agreement).
+8. Added `/privacy` and `/terms` links to the main index.html footer for crawlability + Intuit-reviewer discovery.
+9. Committed + pushed: cbbd306 "Add /privacy and /terms pages for Intuit / OAuth app review" → GitHub Pages rebuilt in ~30s, both URLs returning 200 (no-slash form 301-redirects to slash form — both work).
+10. Closed DAYTA-4 + DAYTA-5 in Jira with comments linking the live URLs (per `feedback_jira_default_close` memory).
+
+### Files Modified
+- `~/Documents/dayta-site/privacy/index.html` (new, 333 lines)
+- `~/Documents/dayta-site/terms/index.html` (new, 365 lines)
+- `~/Documents/dayta-site/index.html` (footer: added Privacy + Terms links alongside the two email addresses)
+
+### Key Findings
+- GitHub Pages serves `/privacy/index.html` as both `/privacy` (301→) and `/privacy/` (200), so the cleaner Intuit-form URL `daytanalytics.com/privacy` works without trailing slash.
+- The two existing `dayta-*` folders are easy to confuse: `dayta-site` is the live one (has CNAME + matches live HTML), `dayta-website` is an older drafting workspace.
+
+### Outstanding
+- Texas governing law is now baked into Terms — if Dayta Analytics LLC is ever re-domiciled, search for "State of Texas" in `terms/index.html` and swap.
+- No real lawyer review on either doc. Boilerplate is reasonable for the Intuit App Assessment gate, but consider a lawyer pass before any high-stakes signature event.
+- Other OAuth providers (Clio, RingCentral) will reuse these same two URLs when their app-review forms come due — no per-provider page needed.
+
+---
+
 ## 2026-05-30 15:25 — Built daytanalytics.com Marketing Site + Card Restyle + DNS Cutover
 
 ### Issue / Task
