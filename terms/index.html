@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F4EDDC">
+<title>Terms of Service — Dayta Analytics</title>
+<meta name="description" content="Terms governing use of Dayta Analytics LLC's website, consulting services, and software integrations, including those connected to third-party platforms such as Intuit QuickBooks Online, Clio, and RingCentral.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23F4EDDC%22/><text x=%2250%22 y=%2275%22 text-anchor=%22middle%22 font-family=%22Helvetica%22 font-weight=%22900%22 font-size=%2270%22 fill=%22%230A0908%22>D</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#F4EDDC; --paper-2:#EDE4CE;
+  --ink:#0A0908; --ink-soft:#2A2823; --ink-mute:#5A5650;
+  --hair:rgba(10,9,8,.14); --hair-strong:rgba(10,9,8,.32);
+  --accent:#1A3FFF; --highlight:#FFE85C;
+  --display:"Fraunces","Times New Roman",serif;
+  --body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono","SF Mono",Menlo,monospace;
+  --pad-x: clamp(20px, 5vw, 80px);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{
+  font-family:var(--body);font-weight:400;font-size:17px;line-height:1.62;
+  color:var(--ink);background:var(--paper);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden;max-width:100vw;
+}
+a{color:inherit}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.035;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size:220px 220px;mix-blend-mode:multiply;
+}
+.shell{position:relative;z-index:2}
+.row{padding-left:var(--pad-x);padding-right:var(--pad-x);max-width:1480px;margin-inline:auto}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--ink)}
+.nav-row{display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;height:30px;text-decoration:none}
+.nav-logo img{height:24px;width:auto}
+.nav-links{
+  display:flex;gap:36px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;font-weight:500;
+}
+.nav-links a{position:relative;padding:6px 0;text-decoration:none}
+.nav-links a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--ink);
+  transition:right .25s ease;
+}
+.nav-links a:hover::after{right:0}
+.nav-cta{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;padding:9px 16px;border:1px solid var(--ink);
+  background:var(--ink);color:var(--paper);text-decoration:none;
+  transition:background .2s,color .2s;
+}
+.nav-cta:hover{background:transparent;color:var(--ink)}
+@media (max-width:720px){.nav-links{display:none}}
+
+/* Header */
+.doc-header{
+  padding: clamp(56px, 8vw, 110px) 0 clamp(36px, 5vw, 64px);
+  border-bottom:1px solid var(--ink);
+}
+.doc-meta{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 24px;
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+.doc-meta span{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-mute);
+}
+.doc-h1{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 25,"wght" 500;
+  font-size: clamp(48px, 8vw, 120px);
+  line-height:.92;letter-spacing:-.03em;
+  margin-bottom: clamp(20px, 3vw, 36px);
+}
+.doc-h1 em{font-style:italic;font-variation-settings:"opsz" 144,"SOFT" 100,"wght" 400}
+.doc-lede{
+  font-family:var(--body);font-size: clamp(17px, 1.5vw, 20px);
+  line-height:1.5;color:var(--ink-soft);max-width:720px;font-weight:400;
+}
+
+/* Body */
+.doc-body{
+  padding: clamp(48px, 6vw, 88px) 0 clamp(80px, 10vw, 140px);
+  border-bottom:1px solid var(--ink);
+}
+.doc-inner{
+  display:grid;grid-template-columns: 220px 1fr;
+  gap: clamp(40px, 6vw, 96px);align-items:start;
+}
+.toc{
+  position:sticky;top:88px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  display:flex;flex-direction:column;gap:10px;
+}
+.toc .label{color:var(--ink-mute);letter-spacing:.22em;margin-bottom:6px}
+.toc a{color:var(--ink-soft);text-decoration:none;padding:2px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.toc a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.prose{max-width:760px}
+.prose h2{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 500;
+  font-size: clamp(28px, 3.4vw, 42px);
+  line-height:1.05;letter-spacing:-.02em;
+  margin-top: clamp(48px, 5vw, 64px);
+  margin-bottom: 20px;
+  scroll-margin-top:88px;
+}
+.prose h2:first-child{margin-top:0}
+.prose h2 em{font-style:italic;font-variation-settings:"opsz" 144,"SOFT" 100,"wght" 400}
+.prose h3{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 500;
+  font-size: clamp(20px, 2vw, 24px);
+  line-height:1.2;letter-spacing:-.015em;
+  margin-top:32px;margin-bottom:12px;
+}
+.prose p{margin-bottom:18px;color:var(--ink-soft)}
+.prose p strong, .prose li strong{color:var(--ink);font-weight:600}
+.prose ul, .prose ol{margin: 8px 0 22px 22px}
+.prose li{margin-bottom:10px;color:var(--ink-soft)}
+.prose a{
+  color:var(--accent);text-decoration:none;
+  border-bottom:1px solid var(--hair-strong);transition:border-color .2s;
+}
+.prose a:hover{border-bottom-color:var(--accent)}
+.prose hr{border:none;border-top:1px solid var(--hair-strong);margin:48px 0}
+.callout{
+  background:var(--paper-2);border:1px solid var(--hair-strong);
+  padding: clamp(20px, 2.4vw, 28px);
+  margin: 28px 0;
+  font-family:var(--body);font-size:15px;line-height:1.6;color:var(--ink-soft);
+}
+.callout strong{
+  display:block;
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink);margin-bottom:8px;font-weight:600;
+}
+.allcaps{
+  font-family:var(--body);font-size:14px;line-height:1.7;
+  text-transform:uppercase;letter-spacing:.02em;
+  color:var(--ink);font-weight:500;
+}
+@media (max-width:880px){
+  .doc-inner{grid-template-columns:1fr}
+  .toc{position:static;flex-direction:row;flex-wrap:wrap;gap:14px 18px;padding-bottom:24px;border-bottom:1px solid var(--hair-strong)}
+  .toc .label{width:100%;margin-bottom:0}
+}
+
+/* Footer */
+footer{
+  background:var(--ink);color:var(--paper-2);padding: clamp(24px,3vw,36px) 0;
+  border-top:1px solid rgba(244,237,220,.18);
+}
+.foot-row{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+}
+.foot-row .links{display:flex;gap:24px;flex-wrap:wrap}
+.foot-row .links a{opacity:.7;transition:opacity .2s;text-decoration:none}
+.foot-row .links a:hover{opacity:1}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<header class="nav">
+  <div class="row nav-row">
+    <a href="/" class="nav-logo" aria-label="Dayta Analytics">
+      <img src="/logo.png" alt="DAYTA" />
+    </a>
+    <nav class="nav-links" aria-label="primary">
+      <a href="/#features">Services</a>
+      <a href="/#work">Work</a>
+      <a href="/#founder">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="/#contact">Start the conversation →</a>
+  </div>
+</header>
+
+<section class="doc-header">
+  <div class="row">
+    <div class="doc-meta">
+      <span>Legal · Vol. 02</span>
+      <span>Effective: June 8, 2026</span>
+    </div>
+    <h1 class="doc-h1">Terms of <em>Service</em>.</h1>
+    <p class="doc-lede">
+      These terms govern your use of Dayta Analytics LLC's website, our consulting services, and any software systems we build, operate, or integrate on your behalf. By engaging us, signing a statement of work, or using software we deploy, you agree to these terms.
+    </p>
+  </div>
+</section>
+
+<section class="doc-body">
+  <div class="row doc-inner">
+    <aside class="toc" aria-label="On this page">
+      <span class="label">On this page</span>
+      <a href="#acceptance">Acceptance</a>
+      <a href="#services">Services</a>
+      <a href="#engagements">Engagements &amp; SOWs</a>
+      <a href="#acceptable-use">Acceptable use</a>
+      <a href="#third-party">Third-party services</a>
+      <a href="#ip">Intellectual property</a>
+      <a href="#confidentiality">Confidentiality</a>
+      <a href="#fees">Fees &amp; payment</a>
+      <a href="#warranty">Warranty disclaimer</a>
+      <a href="#liability">Limitation of liability</a>
+      <a href="#indemnification">Indemnification</a>
+      <a href="#term">Term &amp; termination</a>
+      <a href="#law">Governing law</a>
+      <a href="#changes">Changes</a>
+      <a href="#contact">Contact</a>
+    </aside>
+
+    <article class="prose">
+
+      <h2 id="acceptance">Acceptance</h2>
+      <p>These Terms of Service (the "Terms") form a binding agreement between you (the "Client" or "you") and Dayta Analytics LLC, a Texas limited liability company ("Dayta," "we," "us"). You accept these Terms when you sign a statement of work, send written confirmation by email, pay an invoice issued by us, or use any software system we have deployed for you. If you do not agree to these Terms, do not engage our services.</p>
+      <p>If you are entering into these Terms on behalf of a company or other legal entity, you represent that you have authority to bind that entity, and "Client" refers to that entity.</p>
+
+      <h2 id="services">Services</h2>
+      <p>Dayta provides professional services in the areas of data engineering, analytics, business intelligence, software development, and AI integration. Specific deliverables, scope, and timing are described in a statement of work, proposal, or email confirmation between you and Dayta (a "SOW"). In the event of a conflict between these Terms and a signed SOW, the SOW controls.</p>
+      <p>Where a SOW involves connecting to or operating software on top of a third-party service (for example Intuit QuickBooks Online, Clio, RingCentral, or any Google Cloud product), the third party's own terms of service apply to your relationship with that third party. We are not responsible for the third party's availability, pricing, or behavior.</p>
+
+      <h2 id="engagements">Engagements and SOWs</h2>
+      <ul>
+        <li><strong>Project work</strong> is delivered against a fixed-fee SOW or against a documented hourly rate, as agreed in writing.</li>
+        <li><strong>Retainers</strong> renew automatically on the schedule stated in the SOW until either party cancels in writing with the notice period stated in the SOW (or, if none is stated, 30 days).</li>
+        <li><strong>Out-of-scope work</strong> is performed only after written agreement on additional fees or an updated SOW.</li>
+      </ul>
+
+      <h2 id="acceptable-use">Acceptable use</h2>
+      <p>You agree not to use Dayta's services, or any software we deploy for you, to:</p>
+      <ul>
+        <li>Violate any applicable law or regulation, including data-protection, export-control, anti-spam, and consumer-protection laws.</li>
+        <li>Infringe the intellectual-property rights of any third party.</li>
+        <li>Upload, store, or process data you do not have lawful authority to upload, store, or process.</li>
+        <li>Process protected health information (PHI), payment card data (PAN), or other regulated data unless we have first entered into a separate written agreement (such as a Business Associate Agreement) covering that data.</li>
+        <li>Attempt to gain unauthorized access to any third-party system, including by misusing credentials or API tokens we issue or hold on your behalf.</li>
+        <li>Use the services to send unsolicited bulk communications, malware, or content intended to harass or harm others.</li>
+        <li>Reverse engineer, decompile, or attempt to derive source code from any component we have not provided to you in source form.</li>
+      </ul>
+
+      <h2 id="third-party">Third-party services and credentials</h2>
+      <p>Many engagements require you to authorize Dayta to access third-party services on your behalf, by granting OAuth consent, by sharing API credentials, or by inviting a Dayta-controlled service account into a system you own.</p>
+      <p>You represent and warrant that (a) you have the right to grant such access, (b) the data we access through those systems may lawfully be processed for the purposes described in the SOW, and (c) you will revoke our access promptly once an engagement ends or upon written request from us. We will likewise dispose of credentials we hold once no longer needed for the engagement.</p>
+      <p>If you provide us with credentials belonging to another individual or to a system you do not control, you are responsible for ensuring that the relevant owner has authorized that access. We may decline to use credentials we reasonably believe were not properly authorized.</p>
+
+      <h2 id="ip">Intellectual property</h2>
+
+      <h3>Your materials</h3>
+      <p>You retain all right, title, and interest in data, content, brand assets, and other materials you provide to us ("Client Materials"). You grant Dayta a non-exclusive, worldwide, royalty-free license to use Client Materials solely as necessary to perform the services.</p>
+
+      <h3>Deliverables</h3>
+      <p>Subject to full payment of all fees due, Dayta assigns to you ownership of the specific software deliverables, reports, and dashboards identified in the SOW as deliverables for that engagement ("Deliverables"), excluding any pre-existing tools, libraries, scripts, or know-how owned by Dayta and used to produce them ("Dayta Tools"). Dayta Tools remain the property of Dayta, and Dayta grants you a non-exclusive, perpetual, royalty-free license to use Dayta Tools as embedded in the Deliverables.</p>
+
+      <h3>Feedback</h3>
+      <p>If you provide suggestions, ideas, or feedback about our services or methods, you grant Dayta a non-exclusive, perpetual, royalty-free license to use that feedback for any purpose, including improving the services.</p>
+
+      <h3>Trademarks</h3>
+      <p>The names "Dayta Analytics" and "Dayta," together with our logos, are trademarks of Dayta Analytics LLC. No right to use those marks is granted by these Terms.</p>
+
+      <h2 id="confidentiality">Confidentiality</h2>
+      <p>Each party may receive information from the other that is marked confidential or that should reasonably be understood as confidential given its nature ("Confidential Information"). Each party agrees to protect the other's Confidential Information using at least the same degree of care it uses to protect its own confidential information, and not less than a reasonable degree of care. Confidential Information may be disclosed only to employees, contractors, and advisors who need to know it and who are bound by comparable confidentiality obligations.</p>
+      <p>These obligations do not apply to information that is or becomes public through no fault of the receiving party, was already known to the receiving party without a duty of confidentiality, is independently developed without reference to the Confidential Information, or is required to be disclosed by law.</p>
+
+      <h2 id="fees">Fees, invoicing, and taxes</h2>
+      <ul>
+        <li><strong>Invoices</strong> are issued through Stripe and are due on receipt unless the SOW states otherwise.</li>
+        <li><strong>Late payments</strong> may, at Dayta's discretion, accrue interest at the lesser of 1.5% per month or the maximum rate permitted by law, beginning 30 days after the invoice date.</li>
+        <li><strong>Suspension</strong> — if an invoice is more than 30 days past due, Dayta may suspend services and access to deployed systems until the balance is cleared.</li>
+        <li><strong>Expenses</strong> — out-of-pocket expenses (cloud spend, third-party software, travel) are passed through at cost only when pre-approved in writing.</li>
+        <li><strong>Taxes</strong> — fees are exclusive of taxes. You are responsible for any sales, use, or value-added taxes assessed on the services, other than taxes on Dayta's income.</li>
+      </ul>
+
+      <h2 id="warranty">Warranty disclaimer</h2>
+      <div class="callout">
+        <strong>Please read</strong>
+        <p class="allcaps" style="margin:0">Except as expressly stated in a signed SOW, the services and any software deliverables are provided "AS IS" and "AS AVAILABLE," without warranties of any kind, whether express, implied, statutory, or otherwise. Dayta disclaims all implied warranties, including warranties of merchantability, fitness for a particular purpose, title, and non-infringement, and any warranties arising from course of dealing or usage of trade. Dayta does not warrant that the services or software will be uninterrupted, error-free, or free of harmful components, or that any data processed will be accurate or complete.</p>
+      </div>
+
+      <h2 id="liability">Limitation of liability</h2>
+      <div class="callout">
+        <strong>Please read</strong>
+        <p class="allcaps" style="margin:0 0 12px">To the maximum extent permitted by law, neither party will be liable for any indirect, incidental, special, consequential, exemplary, or punitive damages, or for any loss of profits, revenue, data, business opportunity, or goodwill, arising out of or related to these Terms or the services, even if advised of the possibility of such damages.</p>
+        <p class="allcaps" style="margin:0">Each party's total aggregate liability arising out of or related to these Terms or the services is capped at the fees actually paid by Client to Dayta during the twelve (12) months immediately preceding the event giving rise to the claim. This cap applies to all claims in the aggregate, not per claim.</p>
+      </div>
+      <p>The limitations in this section do not apply to (a) either party's breach of its confidentiality obligations, (b) Client's payment obligations, or (c) liability that cannot be limited under applicable law (such as for gross negligence, willful misconduct, or fraud).</p>
+
+      <h2 id="indemnification">Indemnification</h2>
+      <p>You will defend, indemnify, and hold harmless Dayta and its officers, employees, and contractors from and against any third-party claim, demand, loss, or expense (including reasonable attorneys' fees) arising out of or related to (a) Client Materials, (b) your use of the services in violation of these Terms or applicable law, or (c) credentials or access you provided to a third-party system that you were not authorized to share.</p>
+      <p>Dayta will defend, indemnify, and hold harmless Client from and against any third-party claim that the Deliverables, as delivered by Dayta and used as authorized in the SOW, infringe a U.S. intellectual-property right, except to the extent the claim arises from Client Materials or from Client's modifications to the Deliverables.</p>
+
+      <h2 id="term">Term and termination</h2>
+      <p>These Terms begin on the date you first accept them and continue until all SOWs between the parties have ended.</p>
+      <ul>
+        <li>Either party may terminate a SOW for the other party's material breach if the breach is not cured within fifteen (15) days after written notice describing the breach.</li>
+        <li>Either party may terminate a SOW immediately if the other party becomes insolvent, files for bankruptcy, or ceases business operations.</li>
+        <li>On termination, Client will pay Dayta for all services performed and expenses incurred up to the effective date of termination.</li>
+        <li>Dayta will, on Client's request, return or delete Client data and revoke credentials we hold, except where retention is required by law.</li>
+        <li>Sections that by their nature should survive termination (Intellectual Property, Confidentiality, Fees for work already performed, Warranty Disclaimer, Limitation of Liability, Indemnification, Governing Law) will survive.</li>
+      </ul>
+
+      <h2 id="law">Governing law and disputes</h2>
+      <p>These Terms are governed by the laws of the State of Texas, without regard to its conflict-of-laws principles. The exclusive venue for any dispute arising out of or related to these Terms or the services is the state or federal courts located in Texas, and each party consents to personal jurisdiction in those courts.</p>
+      <p>Before filing suit, the parties will attempt in good faith to resolve any dispute through written notice and a reasonable opportunity to discuss in person or by video call.</p>
+
+      <h2 id="changes">Changes to these Terms</h2>
+      <p>We may update these Terms from time to time by posting an updated version on this page. The "Effective" date at the top of this page will reflect the most recent revision. Material changes will be highlighted with a notice on the website or by email to active clients. Continued use of the services after a change takes effect constitutes acceptance of the updated Terms.</p>
+
+      <h2 id="misc">Miscellaneous</h2>
+      <ul>
+        <li><strong>Independent contractor</strong> — Dayta is an independent contractor, not your employee, agent, partner, or joint venturer.</li>
+        <li><strong>Assignment</strong> — neither party may assign these Terms without the other party's written consent, except that either party may assign to a successor in connection with a merger, acquisition, or sale of substantially all its assets.</li>
+        <li><strong>Notices</strong> — written notices may be sent by email to the addresses each party regularly uses for business communication with the other.</li>
+        <li><strong>Force majeure</strong> — neither party is liable for delay or failure to perform caused by events outside its reasonable control.</li>
+        <li><strong>Severability</strong> — if any provision of these Terms is held unenforceable, the remaining provisions remain in full force and effect.</li>
+        <li><strong>Entire agreement</strong> — these Terms, together with any signed SOWs, constitute the entire agreement between the parties about the services and supersede prior agreements on the same subject.</li>
+      </ul>
+
+      <h2 id="contact">Contact</h2>
+      <p>Questions about these Terms can be sent to:</p>
+      <p>
+        <strong>Dayta Analytics LLC</strong><br>
+        Attn: Landon Colvig, Founder<br>
+        Email: <a href="mailto:landon@daytanalytics.com">landon@daytanalytics.com</a>
+      </p>
+
+    </article>
+  </div>
+</section>
+
+<footer>
+  <div class="row foot-row">
+    <div>© 2026 Dayta Analytics LLC</div>
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="mailto:landon@daytanalytics.com">landon@daytanalytics.com</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
