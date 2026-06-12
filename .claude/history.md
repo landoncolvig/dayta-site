@@ -91,3 +91,36 @@ Landon needed two artifacts before a networking event:
 - Live URLs: https://daytanalytics.com (apex + www), https://card.daytanalytics.com
 
 ---
+## 2026-06-11 20:21 - Design Audit + Fixes Shipped (claude-fable-5 session)
+
+### Issue
+Landon asked for a design audit of daytanalytics.com with UI improvement suggestions, then said "Implement."
+
+### Actions Taken
+1. Audited live site via playwright scroll-capture (desktop 1600px + mobile 390px, 21 section shots) + two DOM probes to verify claims (computed colors, bounding boxes, transforms) instead of eyeballing
+2. Audit found 3 bugs + 6 polish items; presented ranked list
+3. Implemented 5 in index.html, verified locally (incl. JS-disabled render), shipped
+4. Follow-up: testimonial upgrades from a LinkedIn screenshot Landon provided
+
+### Files Modified
+- `index.html` (only file) — commits `337d84d` (auto-sync grabbed the audit fixes), `3cc97d7` (testimonials)
+
+### Changes Shipped
+- **Mobile footer**: was cramming 4 links on one row (global `min-width:0` reset let flex anchors shrink under their glyphs → visual collision/clipping). Now wraps; stacks in a column ≤720px
+- **Mobile menu**: nav links were `display:none` ≤720px with no replacement. Added Menu button + full-screen editorial overlay (numbered Fraunces anchors 01–04, CTA at bottom, Escape/link-click closes). Nav CTA shortens to "Start →" ≤480px
+- **No-JS guard**: `.reveal{opacity:0}` hid the entire page if JS failed. Now scoped under `html.js` (class set by inline head script); reduced-motion override updated to match specificity
+- **Dashboard frame**: removed resting `rotateX(2deg) rotateY(-3deg)` tilt + hover-flatten + perspective; flat with chrome and offset shadow
+- **Mid-page CTA**: "Want this layer under your brand?" + btn-primary after the dashboard sample (`.work-cta`)
+- **Testimonials**: "Lindsay — Mass Culture" was a MISSPELLING of Lindsey Holzberger (confirmed same person); swapped in her stronger Jan 2026 LinkedIn quote + role "eCommerce Growth & Revenue Ops · Mass Culture". Added third quote: David Joyner, "Customer Success Manager · Cox2M" (colleague-era rec, Nov 2023)
+
+### Key Findings
+- **This repo auto-syncs**: a git-sync job auto-committed + pushed my edits within minutes ("Auto-sync: 1 modified") — edits to this working tree go LIVE without an explicit commit. Treat the working tree as production
+- 3 audit items dissolved on reading source (low-res screenshots had misled): stamp already reads "Volume 02 / Issue 05" (consistent with "Vol. 02"), hero lede already 22px desktop, blue dot is the systemwide `--accent` (#1A3FFF) used on all hovers/focus — left all three alone
+- Already solid (verified): single h1, all alts present, no h-overflow, label contrast 6.1:1 AA, dark sections 15.7:1, title/meta strong
+- Reusable tooling left in `~/.claude/skills/playwright-test/output/`: `scroll-audit.cjs` (scroll-triggered section capture), `dom-probe.cjs`, `verify-local.cjs`
+
+### Outstanding
+- Nick (Zenith) stays name+company only by Landon's choice
+- "What partners say" header is slightly loose now that David (colleague, not client/partner) is included — Landon's call, flagged
+
+---
