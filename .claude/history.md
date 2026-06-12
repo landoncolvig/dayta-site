@@ -124,3 +124,32 @@ Landon asked for a design audit of daytanalytics.com with UI improvement suggest
 - "What partners say" header is slightly loose now that David (colleague, not client/partner) is included — Landon's call, flagged
 
 ---
+## 2026-06-12 11:29 - Contact Card Unlink + "Dayta." Rebrand Shipped
+
+### Issue
+(1) Landon didn't want his phone number publicly reachable from the main site. (2) Approved logo refresh: "Dayta." Fraunces masthead (option 02 from comparison board), replacing the geometric sans PNG everywhere.
+
+### Actions Taken
+1. Removed "Contact card ↗" link from index.html; card.daytanalytics.com stays live (number intentionally kept for QR sharing) + added noindex/nofollow to landon-card (`b021c76`)
+2. Generated outlined wordmark: Fraunces VF instanced (wght 600, opsz 144, SOFT 30), shaped with uharfbuzz (kerning), -0.035em tracking, glyphs → SVG paths via fontTools. Venv at /tmp (PEP 668 blocks user pip)
+3. Site (`2675cce`): nav = live text wordmark (site already loads Fraunces), favicon = outlined Fraunces D data-URI, `brand/` = master SVGs (ink/paper/favicon), logo.png replaced
+4. Proposals: replaced shared `~/Documents/proposals/dayta-logo.png` (60 HTMLs re-render with new mark; committed in proposals repo)
+5. landon-card (`afc07a2`..`afce3c4`): logo.png + favicon swapped, .brand .logo 18→24px (new mark carries descender), live hash-verified
+6. Brand pack → `~/Desktop/dayta-brand-pack/`: stripe-icon-512 / stripe-logo-1200 (uploaded by Landon; advised brand=#F4EDDC, accent=#1A3FFF — ink logo vanishes on the default #000000), linkedin-banner (center-weighted to clear avatar overlap) + 300px tile, lockscreen-dayta.png (source: mobile-card/lockscreen-dayta.html, reuses qr-card.png)
+7. Security sidebar: fixed sql_str backslash escaping in ~/.claude/scripts/lsa_action_agent.py (`9f2706e8b`)
+
+### Files Modified
+- `index.html`, `logo.png`, `brand/*` (this repo); `landon-card/{index.html,logo.png}`; `proposals/dayta-logo.png`; `mobile-card/lockscreen-dayta.{html,png}`; `~/.claude/scripts/lsa_action_agent.py`
+
+### Key Findings
+- Playwright `omitBackground` element-screenshots can bake ancestor div backgrounds partially into "transparent" PNGs — rasterize SVGs on a bare transparent page
+- LinkedIn personal banners get the avatar circle over the bottom-left; keep lockups center/right
+- Old logos all recoverable via git history in each repo
+
+### Outstanding
+- Stripe brand/accent colors: advised values, Landon was mid-save (icon+logo confirmed uploaded)
+- LinkedIn banner/logo staged only — public profile change needs Landon's go (li-exec can push banner)
+- Lock-screen wallpaper delivered; Landon sets it on-phone
+- lsa_action_agent.py: proper fix is parameterized BQ queries (flagged, not refactored)
+
+---
