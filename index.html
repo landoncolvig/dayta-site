@@ -9,7 +9,7 @@
 <meta property="og:title" content="Dayta Analytics — Scale with AI. Not headcount.">
 <meta property="og:description" content="AI systems that replace the next hire on your roadmap. Built by a data engineer for Fortune 100s and Y-Combinator startups.">
 <meta property="og:image" content="founder.jpg">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23F4EDDC%22/><text x=%2250%22 y=%2275%22 text-anchor=%22middle%22 font-family=%22Helvetica%22 font-weight=%22900%22 font-size=%2270%22 fill=%22%230A0908%22>D</text></svg>">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23F4EDDC%22/%3E%3Cpath fill=%22%230A0908%22 d=%22M19 81.8Q19 80.9 20.1 80.6L23.7 79.9Q24.7 79.7 25.1 79.2Q25.5 78.8 25.5 77.9V22.1Q25.5 21.2 25.1 20.8Q24.6 20.3 23.7 20.1L20.1 19.4Q19 19.1 19 18.1Q19 17.6 19.4 17.3Q19.8 17 20.4 17H43.2Q51.6 17 58.5 19.5Q65.5 22 70.5 26.7Q75.5 31.5 78.2 38.1Q81 44.8 81 53.1Q81 62.3 76.9 69Q72.8 75.7 65.3 79.3Q57.9 83 47.7 83H20.4Q19.7 83 19.4 82.7Q19 82.4 19 81.8ZM47.4 80.5Q53.2 80.5 57.7 77.4Q62.1 74.4 64.6 68Q67.2 61.7 67.2 51.9Q67.2 44.3 65.5 38.3Q63.8 32.3 60.6 28.1Q57.5 23.9 53 21.7Q48.5 19.5 42.9 19.5H38.7V77.6Q38.7 79 39.4 79.8Q40.1 80.5 41.5 80.5Z%22/%3E%3C/svg%3E">
 
 <script>document.documentElement.classList.add('js');</script>
 
@@ -135,7 +135,14 @@ section{position:relative}
   display:flex;align-items:center;
   height:30px;
 }
-.nav-logo img{height:24px;width:auto}
+.nav-logo .wordmark{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600;
+  font-size:30px;
+  letter-spacing:-.035em;
+  line-height:1;
+  color:var(--ink);
+}
 .nav-links{
   display:flex;gap:36px;
   font-family:var(--mono);
@@ -1173,7 +1180,7 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
 <header class="nav">
   <div class="row nav-row">
     <a href="#top" class="nav-logo" aria-label="Dayta Analytics">
-      <img src="logo.png" alt="DAYTA" />
+      <span class="wordmark">Dayta.</span>
     </a>
     <nav class="nav-links" aria-label="primary">
       <a href="#features">Services</a>
