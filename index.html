@@ -11,6 +11,8 @@
 <meta property="og:image" content="founder.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23F4EDDC%22/><text x=%2250%22 y=%2275%22 text-anchor=%22middle%22 font-family=%22Helvetica%22 font-weight=%22900%22 font-size=%2270%22 fill=%22%230A0908%22>D</text></svg>">
 
+<script>document.documentElement.classList.add('js');</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -163,9 +165,64 @@ section{position:relative}
   transition:background .2s, color .2s;
 }
 .nav-cta:hover{background:transparent;color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-cta .cta-short{display:none}
+.nav-menu-btn{
+  display:none;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:600;
+  padding:9px 14px;
+  border:1px solid var(--ink);
+  background:transparent;
+  color:var(--ink);
+  transition:background .2s, color .2s;
+}
+.nav-menu-btn:hover{background:var(--ink);color:var(--paper)}
 @media (max-width:720px){
   .nav-links{display:none}
+  .nav-menu-btn{display:inline-block}
 }
+@media (max-width:480px){
+  .nav-cta .cta-full{display:none}
+  .nav-cta .cta-short{display:inline}
+}
+
+/* Mobile menu overlay */
+.mobile-menu{
+  position:fixed;
+  top:64px;left:0;right:0;bottom:0;
+  z-index:49;
+  background:var(--paper);
+  display:none;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:32px;
+  padding:24px var(--pad-x) 36px;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu nav{display:flex;flex-direction:column}
+.mobile-menu nav a{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 500;
+  font-size:clamp(36px, 10vw, 56px);
+  line-height:1.1;
+  letter-spacing:-.025em;
+  display:flex;align-items:baseline;gap:16px;
+  padding:20px 0;
+  border-bottom:1px solid var(--hair-strong);
+}
+.mobile-menu nav a .idx{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  color:var(--ink-mute);
+  font-variation-settings:normal;
+}
+.mobile-menu .btn{justify-content:center}
+body.menu-open{overflow:hidden}
 
 /* ───────────────────────────────────────────────
    HERO
@@ -601,7 +658,6 @@ section{position:relative}
 .work-frame{
   margin-top:48px;
   position:relative;
-  perspective:2200px;
 }
 .browser{
   background:var(--white);
@@ -611,18 +667,14 @@ section{position:relative}
   overflow:hidden;
   max-width:1080px;
   margin-inline:auto;
-  transform: rotateX(2deg) rotateY(-3deg);
-  transition: transform .6s ease;
 }
 @media (max-width: 880px){
   .browser{
     box-shadow: 10px 10px 0 var(--ink);
-    transform: none;
     border-radius:10px;
   }
   .work-frame{margin-right:12px;margin-left:0}
 }
-.browser:hover{transform: rotateX(0deg) rotateY(0deg)}
 .browser-bar{
   display:flex;align-items:center;gap:8px;
   padding:12px 16px;
@@ -654,6 +706,20 @@ section{position:relative}
   letter-spacing:.2em;
   text-transform:uppercase;
   color:var(--ink-mute);
+}
+.work-cta{
+  margin-top:48px;
+  display:flex;align-items:center;justify-content:center;
+  gap:16px 28px;flex-wrap:wrap;
+  text-align:center;
+}
+.work-cta .ask{
+  font-family:var(--display);
+  font-variation-settings:"opsz" 144,"SOFT" 50,"wght" 400;
+  font-style:italic;
+  font-size:clamp(19px, 1.7vw, 24px);
+  letter-spacing:-.015em;
+  color:var(--ink-soft);
 }
 
 /* ───────────────────────────────────────────────
@@ -1072,19 +1138,23 @@ footer{
   letter-spacing:.16em;
   text-transform:uppercase;
 }
-.foot-row .links{display:flex;gap:24px}
-.foot-row .links a{opacity:.7;transition:opacity .2s}
+.foot-row .links{display:flex;flex-wrap:wrap;gap:12px 24px}
+.foot-row .links a{opacity:.7;transition:opacity .2s;flex-shrink:0;white-space:nowrap}
 .foot-row .links a:hover{opacity:1}
+@media (max-width:720px){
+  .foot-row{flex-direction:column;align-items:flex-start;gap:18px}
+  .foot-row .links{flex-direction:column;align-items:flex-start;gap:14px}
+}
 
 /* ───────────────────────────────────────────────
    SCROLL REVEAL
    ─────────────────────────────────────────────── */
-.reveal{
+html.js .reveal{
   opacity:0;
   transform: translateY(28px);
   transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
 }
-.reveal.in{opacity:1;transform:translateY(0)}
+html.js .reveal.in{opacity:1;transform:translateY(0)}
 .reveal.d1{transition-delay:.08s}
 .reveal.d2{transition-delay:.16s}
 .reveal.d3{transition-delay:.24s}
@@ -1092,7 +1162,7 @@ footer{
 
 @media (prefers-reduced-motion: reduce){
   *{animation:none!important;transition:none!important}
-  .reveal{opacity:1;transform:none}
+  html.js .reveal{opacity:1;transform:none}
 }
 </style>
 </head>
@@ -1111,9 +1181,22 @@ footer{
       <a href="#founder">About</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="nav-cta" href="#contact">Start the conversation →</a>
+    <div class="nav-right">
+      <a class="nav-cta" href="#contact"><span class="cta-full">Start the conversation →</span><span class="cta-short">Start →</span></a>
+      <button class="nav-menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </div>
   </div>
 </header>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav aria-label="mobile">
+    <a href="#features"><span class="idx">01</span>Services</a>
+    <a href="#work"><span class="idx">02</span>Work</a>
+    <a href="#founder"><span class="idx">03</span>About</a>
+    <a href="#contact"><span class="idx">04</span>Contact</a>
+  </nav>
+  <a class="btn btn-primary" href="#contact">Start the conversation <span class="arrow">→</span></a>
+</div>
 
 <!-- ─── HERO ─────────────────────────────────── -->
 <section class="hero" id="top">
@@ -1289,6 +1372,11 @@ footer{
       </div>
       <div class="work-caption">Sample · Client-facing revenue ops dashboard · Auto-generated, white-labeled, refreshed live.</div>
     </div>
+
+    <div class="work-cta reveal">
+      <span class="ask">Want this layer under your brand?</span>
+      <a href="#contact" class="btn btn-primary">Start the conversation <span class="arrow">→</span></a>
+    </div>
   </div>
 </section>
 
@@ -1459,6 +1547,20 @@ footer{
 </div><!-- /.shell -->
 
 <script>
+// Mobile menu
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+function setMenu(open){
+  mobileMenu.classList.toggle('open', open);
+  document.body.classList.toggle('menu-open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  mobileMenu.setAttribute('aria-hidden', String(!open));
+  menuBtn.textContent = open ? 'Close' : 'Menu';
+}
+menuBtn.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+window.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
 // Smooth scroll-triggered reveal
 const io = new IntersectionObserver((entries) => {
   for (const e of entries){
