@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#F4EDDC">
-<title>Dayta Analytics — AI legibility for marketing agencies</title>
-<meta name="description" content="We make marketing agencies legible to AI — building the systems that ship the work, instead of hiring around it. Automated reports, anomaly monitoring, and custom chat — by a data engineer who consulted for Fortune 100 companies.">
+<title>Dayta Analytics — Connect your business to AI</title>
+<meta name="description" content="I connect the tools your business already runs on to AI, so answers that used to take your team two weeks come back in five minutes. Capture, search, execute, installed end to end by a data engineer who consulted for Fortune 100 companies.">
 <meta property="og:title" content="Dayta Analytics — Scale with AI. Not headcount.">
-<meta property="og:description" content="AI systems that replace the next hire on your roadmap. Built by a data engineer for Fortune 100s and Y-Combinator startups.">
+<meta property="og:description" content="Capture, search, execute. I connect your business tools and data to AI and install the system end to end. Built by a data engineer for Fortune 100s and Y-Combinator startups.">
 <meta property="og:image" content="founder.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23F4EDDC%22/%3E%3Cpath fill=%22%230A0908%22 d=%22M19 81.8Q19 80.9 20.1 80.6L23.7 79.9Q24.7 79.7 25.1 79.2Q25.5 78.8 25.5 77.9V22.1Q25.5 21.2 25.1 20.8Q24.6 20.3 23.7 20.1L20.1 19.4Q19 19.1 19 18.1Q19 17.6 19.4 17.3Q19.8 17 20.4 17H43.2Q51.6 17 58.5 19.5Q65.5 22 70.5 26.7Q75.5 31.5 78.2 38.1Q81 44.8 81 53.1Q81 62.3 76.9 69Q72.8 75.7 65.3 79.3Q57.9 83 47.7 83H20.4Q19.7 83 19.4 82.7Q19 82.4 19 81.8ZM47.4 80.5Q53.2 80.5 57.7 77.4Q62.1 74.4 64.6 68Q67.2 61.7 67.2 51.9Q67.2 44.3 65.5 38.3Q63.8 32.3 60.6 28.1Q57.5 23.9 53 21.7Q48.5 19.5 42.9 19.5H38.7V77.6Q38.7 79 39.4 79.8Q40.1 80.5 41.5 80.5Z%22/%3E%3C/svg%3E">
 
@@ -652,6 +652,49 @@ body.menu-open{overflow:hidden}
 }
 
 /* ───────────────────────────────────────────────
+   ORDER NOTE
+   ─────────────────────────────────────────────── */
+.order-note{
+  border-top:1px solid var(--ink);
+  background: var(--paper-2);
+  padding: clamp(44px, 5.5vw, 76px) 0;
+}
+.order-note-inner{
+  display:grid;
+  grid-template-columns: 1fr 2fr;
+  gap: clamp(24px, 4vw, 80px);
+  align-items:start;
+}
+.order-note .label{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+  display:flex;align-items:center;gap:12px;
+}
+.order-note .label::before{
+  content:"";display:inline-block;
+  width:28px;height:1px;background:var(--ink);
+}
+.order-note p{
+  font-size: clamp(17px, 1.55vw, 22px);
+  line-height:1.5;
+  color:var(--ink-soft);
+  max-width:62ch;
+}
+.order-note p + p{margin-top:.85em}
+.order-note em{
+  font-family:var(--display);
+  font-style:italic;
+  font-variation-settings:"opsz" 144,"SOFT" 100,"wght" 400;
+  color:var(--ink);
+}
+@media (max-width:780px){
+  .order-note-inner{grid-template-columns:1fr;gap:18px}
+}
+
+/* ───────────────────────────────────────────────
    WORK SAMPLE
    ─────────────────────────────────────────────── */
 .work{
@@ -1183,7 +1226,7 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
       <span class="wordmark">Dayta.</span>
     </a>
     <nav class="nav-links" aria-label="primary">
-      <a href="#features">Services</a>
+      <a href="#features">Approach</a>
       <a href="#work">Work</a>
       <a href="#founder">About</a>
       <a href="#contact">Contact</a>
@@ -1197,7 +1240,7 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
 
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <nav aria-label="mobile">
-    <a href="#features"><span class="idx">01</span>Services</a>
+    <a href="#features"><span class="idx">01</span>Approach</a>
     <a href="#work"><span class="idx">02</span>Work</a>
     <a href="#founder"><span class="idx">03</span>About</a>
     <a href="#contact"><span class="idx">04</span>Contact</a>
@@ -1223,7 +1266,7 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
     </h1>
 
     <p class="hero-sub reveal d2">
-      We make marketing agencies <b>legible to AI</b>, building the systems that ship the work instead of hiring around it. A boutique consultancy for operators who want to grow without growing the org chart.
+      I connect the tools your business already runs on (email, meetings, CRM, finance, operations) to AI, so your company becomes something you can <b>ask questions of</b>. A boutique consultancy for executives and owners who want the system installed and working.
     </p>
 
     <div class="hero-ctas reveal d3">
@@ -1248,11 +1291,11 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
   <div class="row story-inner">
     <div>
       <div class="story-eyebrow">We've run this playbook</div>
-      <h2 class="reveal">I built <em>this</em> agency the same way.</h2>
+      <h2 class="reveal">I ran this on <em>my own company</em> first.</h2>
       <div class="story-body reveal d1">
         <p>Dayta started as a typical service business: five subcontractors, an assistant, work bottlenecked by people. So I ran the playbook on myself.</p>
-        <p>I made every process legible to AI: structured the data, defined the outputs, replaced the team with systems. Revenue tripled. Headcount went to one.</p>
-        <p>Now we run it for marketing agencies. Same playbook. Same outcome.</p>
+        <p>I connected everything to AI. Every message, every meeting, every client system, captured and searchable. Then I put agents on the work and supervised. Revenue tripled. Headcount went to one.</p>
+        <p>Today I handle what used to take about twenty full-time analysts, engineers, and account managers. I install the same system for executives who have a real company to run.</p>
       </div>
       <div class="story-attr reveal d2">Landon Colvig · Founder</div>
     </div>
@@ -1266,12 +1309,12 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
       <div class="stat">
         <div class="stat-num">6→1<span class="unit">team</span></div>
         <div class="stat-label">Headcount shift</div>
-        <div class="sub">Five subcontractors and an assistant, consolidated into AI workflows.</div>
+        <div class="sub">Five subcontractors and an assistant, consolidated into AI systems.</div>
       </div>
       <div class="stat">
-        <div class="stat-num">0<span class="unit">hires</span></div>
-        <div class="stat-label">Net new payroll</div>
-        <div class="sub">Every growth lever pulled by software, not staffing.</div>
+        <div class="stat-num">20<span class="unit">roles</span></div>
+        <div class="stat-label">Workload absorbed</div>
+        <div class="sub">Analyst, engineer, PM and account-manager work, run by one operator and agents.</div>
       </div>
     </div>
   </div>
@@ -1290,7 +1333,7 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
       </div>
       <div class="authority-stat reveal d2">
         <div class="n">10+</div>
-        <div class="l">Client-facing reports built</div>
+        <div class="l">Reporting systems shipped</div>
       </div>
       <div class="authority-stat reveal d3">
         <div class="n">2024</div>
@@ -1304,23 +1347,23 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
 <section class="section features" id="features">
   <div class="row">
     <div class="section-head">
-      <div class="label reveal">What we build</div>
-      <h2 class="reveal d1">Three systems that <em>replace</em> the next hire on your roadmap.</h2>
+      <div class="label reveal">The system</div>
+      <h2 class="reveal d1">Three things AI should be doing in your business. <em>In this order.</em></h2>
     </div>
 
     <div class="feature reveal">
       <div class="idx">01</div>
       <div>
-        <h3>Automated <em>branded</em> reports.</h3>
+        <h3><em>Capture</em> everything.</h3>
       </div>
       <div class="feature-body">
-        <p>Client-facing performance reports that build, brand, and ship themselves. White-labeled to your agency, regenerated on a schedule, delivered straight into your client's inbox. The version of "reporting" that doesn't require a Monday-morning analyst.</p>
-        <p>Pulls from Triple Whale, Hyros, Meta, Google, GA4, server-side conversions (whatever data your clients care about), and writes the narrative around it.</p>
+        <p>Every email, every message, every meeting gets recorded and stored where AI can reach it later. A sales call comes back as a transcript, the customer's needs and objections, the next steps, and a drafted CRM update. An operations meeting comes back as decisions, owners, and deadlines.</p>
+        <p>Your CRM, accounting, ad accounts, support desk, and line-of-business systems land in one warehouse your company owns. This is the step that makes the other two possible.</p>
         <div class="feature-replaces">
-          <span class="label">Replaces</span>
-          <span class="tag">Reporting analyst</span>
-          <span class="tag">Looker Studio babysitting</span>
-          <span class="tag">"Send me the deck"</span>
+          <span class="label">Ends</span>
+          <span class="tag">Meeting notes nobody writes</span>
+          <span class="tag">Decisions lost in someone's notebook</span>
+          <span class="tag">Data stranded in nine tools</span>
         </div>
       </div>
     </div>
@@ -1328,16 +1371,16 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
     <div class="feature reveal">
       <div class="idx">02</div>
       <div>
-        <h3>AI anomaly <em>monitoring</em>.</h3>
+        <h3><em>Search</em> your whole company.</h3>
       </div>
       <div class="feature-body">
-        <p>An AI that watches every paid account, every funnel, every attribution model, and tells you when something quietly broke. Spend doubled three days ago? Conversion rate drifting on the new audience? You hear about it before the client does.</p>
-        <p>Replaces the daily-dashboard-scroll ritual. Replaces "I should have caught that on Tuesday." Replaces the senior account manager who used to notice these things.</p>
+        <p>Ask in plain English, get an answer out of your own numbers. Which customers are showing early signs of churn. Why gross margin fell last quarter, broken down by product, segment, and cost category. What we committed to a customer, and who owns each commitment.</p>
+        <p>Questions that used to take your team two weeks come back in two to five minutes, and every follow-up gets answered in the same sitting. Nobody stops their work to pull it.</p>
         <div class="feature-replaces">
           <span class="label">Replaces</span>
-          <span class="tag">Daily dashboard scroll</span>
-          <span class="tag">Senior account manager pattern-matching</span>
-          <span class="tag">Monday-morning surprises</span>
+          <span class="tag">The two-week answer</span>
+          <span class="tag">"Can someone pull this for me?"</span>
+          <span class="tag">The analyst request queue</span>
         </div>
       </div>
     </div>
@@ -1345,18 +1388,29 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
     <div class="feature reveal">
       <div class="idx">03</div>
       <div>
-        <h3>Custom AI <em>chat layer</em>.</h3>
+        <h3><em>Execute</em> with agents.</h3>
       </div>
       <div class="feature-body">
-        <p>Drop a chat interface into your client portal, or into Slack, that actually knows their data. Your clients ask, "Why did CAC spike last week?" and get a real answer drawn from their pixel, their CRM, their ad accounts. Not a generic LLM. Their numbers.</p>
-        <p>Built on the same architecture we use for industrial operators querying live sensor telemetry, then re-engineered for marketing performance.</p>
+        <p>With everything connected, AI can audit how the company actually works and build the software that removes the manual parts. We start in the C-suite. Each executive gets a coding agent pointed at company data, so a pricing meeting brief assembles itself from contracts, renewal dates, product margins, and recent call notes.</p>
+        <p>Then it goes company-wide. The internal tools and automations that used to need a six-month project request get built in an afternoon, and your team's hours move to revenue.</p>
         <div class="feature-replaces">
           <span class="label">Replaces</span>
-          <span class="tag">"Can someone pull this for me?"</span>
-          <span class="tag">Strategist Q&amp;A calls</span>
-          <span class="tag">Client-side data anxiety</span>
+          <span class="tag">Manual data entry</span>
+          <span class="tag">The next analyst hire</span>
+          <span class="tag">The internal tooling backlog</span>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ORDER NOTE ───────────────────────────── -->
+<section class="order-note">
+  <div class="row order-note-inner">
+    <div class="label reveal">Where it goes wrong</div>
+    <div class="reveal d1">
+      <p>Most companies start at number three. They buy an agent, point it at a business it cannot see, and get confident answers built on nothing.</p>
+      <p>The verdict comes back a month later: <em>AI just isn't there yet.</em> The tool was working blind. Capture and search come first, every time, and that is the part almost nobody sells you.</p>
     </div>
   </div>
 </section>
@@ -1366,22 +1420,22 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
   <div class="row">
     <div class="section-head">
       <div class="label reveal">A sample of the work</div>
-      <h2 class="reveal d1">An <em>agency-grade</em> reporting layer your clients will think you built in-house.</h2>
+      <h2 class="reveal d1">The reporting layer your team <em>stops building</em> by hand.</h2>
     </div>
 
     <div class="work-frame reveal d2">
       <div class="browser">
         <div class="browser-bar">
           <div class="dots"><span></span><span></span><span></span></div>
-          <div class="url">app.client-portal.com / revenue-ops</div>
+          <div class="url">portal.yourcompany.com / revenue-ops</div>
         </div>
-        <img src="dashboard.png?v=2" alt="Sample Dayta client portal: agency-grade revenue and attribution analytics">
+        <img src="dashboard.png?v=2" alt="Sample Dayta executive portal: revenue and attribution analytics built from connected systems">
       </div>
-      <div class="work-caption">Sample · Client-facing revenue ops dashboard · Auto-generated, white-labeled, refreshed live.</div>
+      <div class="work-caption">Sample · Executive revenue ops dashboard · Generated from connected systems, refreshed live.</div>
     </div>
 
     <div class="work-cta reveal">
-      <span class="ask">Want this layer under your brand?</span>
+      <span class="ask">Want this running on your numbers?</span>
       <a href="#contact" class="btn btn-primary">Start the conversation <span class="arrow">→</span></a>
     </div>
   </div>
@@ -1454,7 +1508,7 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
       </h2>
       <div class="founder-bio reveal d2">
         <p>Before founding Dayta, I built reporting and analytics infrastructure from scratch for Fortune 100 retailers and Y-Combinator-backed startups. The layer underneath the systems most operators never see.</p>
-        <p>Dayta Analytics is a project-based consultancy helping marketing agencies elevate client-facing reports, layer in advanced attribution beyond Triple Whale and Hyros, and automate the manual data and admin work that quietly bottlenecks growth.</p>
+        <p>Dayta Analytics is a project-based consultancy. I connect the systems a company already runs on to AI, build the warehouse and the search layer underneath, and ship the internal software that removes the manual work. Clients run law firms, healthcare practices, industrial operations, storage portfolios, retail brands, and marketing agencies.</p>
         <p>Founded January 2024. Headquartered nowhere. Built remote.</p>
       </div>
 
@@ -1491,11 +1545,12 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
     <div class="cta-side-l reveal">
       <div class="cta-eyebrow">Start the conversation</div>
       <h2>Let's <em>talk</em>.</h2>
-      <p class="cta-lede">Tell me what you're trying to scale. I'll come back with a real read: what an AI system would look like, what it would replace, and what it would cost. Usually within 24 hours.</p>
+      <p class="cta-lede">Tell me how your business runs today. I'll come back with a real read: what to connect first, what it would let you ask, what it would replace, and what it would cost. Usually within 24 hours.</p>
 
       <div class="cta-trust">
         <div class="item"><span class="check"></span><span>Personally read &amp; replied to by Landon. No SDR, no funnel.</span></div>
         <div class="item"><span class="check"></span><span>Free 30-minute scoping call if there's a fit. No pitch deck.</span></div>
+        <div class="item"><span class="check"></span><span>Nothing to buy from me. I connect the tools you already own.</span></div>
         <div class="item"><span class="check"></span><span>If we're not the right partner, I'll tell you who is.</span></div>
       </div>
     </div>
@@ -1521,15 +1576,15 @@ html.js .reveal.in{opacity:1;transform:translateY(0)}
           </div>
           <div class="field">
             <label for="lf_email">Email</label>
-            <input id="lf_email" type="email" name="Email" placeholder="you@youragency.com" required autocomplete="email">
+            <input id="lf_email" type="email" name="Email" placeholder="you@yourcompany.com" required autocomplete="email">
           </div>
           <div class="field">
-            <label for="lf_company">Agency / Company</label>
-            <input id="lf_company" type="text" name="Company" placeholder="Your agency name" autocomplete="organization">
+            <label for="lf_company">Company</label>
+            <input id="lf_company" type="text" name="Company" placeholder="Your company name" autocomplete="organization">
           </div>
           <div class="field">
-            <label for="lf_msg">What are you trying to scale?</label>
-            <textarea id="lf_msg" name="Message" placeholder="Reporting? Attribution? Client comms? The next hire you'd love to skip?" rows="3" required></textarea>
+            <label for="lf_msg">What is slowing the business down?</label>
+            <textarea id="lf_msg" name="Message" placeholder="Where does information get stuck? Which question takes too long to answer? The next hire you'd love to skip?" rows="3" required></textarea>
           </div>
 
           <button type="submit" class="form-submit" id="formSubmit">
