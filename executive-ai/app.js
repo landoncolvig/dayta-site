@@ -19,4 +19,3 @@ function render(){
 }
 fetch('demo/outputs/results.json').then(r=>{if(!r.ok)throw Error('Missing example data');return r.json();}).then(d=>{data=d;render();}).catch(()=>{document.querySelector('#demo-output').textContent='';const error=document.querySelector('#demo-error');error.hidden=false;error.textContent='The prepared example could not load. Run the local build and reload the page. No live company systems are connected.';});
 document.querySelectorAll('#month,#office').forEach(el=>el.addEventListener('change',()=>{if(data)render();}));
-document.querySelector('#scope-form').addEventListener('submit',event=>{event.preventDefault();document.querySelector('#form-result').textContent='Preview complete. A live inquiry would capture your tools, warehouse requirements, and onboarding count. Nothing was saved or sent.';});
