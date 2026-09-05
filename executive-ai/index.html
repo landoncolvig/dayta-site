@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow"><link rel="canonical" href="https://daytanalytics.com/executive-ai/"><meta name="theme-color" content="#F4EDDC">
+<title>Executive AI implementation | Dayta</title>
+<meta name="description" content="Connect your business tools, build a data warehouse for AI, and onboard your finance and operations team to Codex.">
+<link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="review-note">Interactive demonstration. The inquiry preview does not send or save your information.</div>
+<header><a class="wordmark" href="/" aria-label="Dayta home">Dayta.</a><nav aria-label="Main"><a href="#foundation">The implementation</a><a href="#example">Explore the example</a><a class="button small" href="#scope">Scope your implementation</a></nav></header>
+<main id="main">
+<section class="hero">
+ <div><p class="audience">For finance and operations leaders</p><h1>Put an AI agent to work with your business data.</h1><p class="intro">We connect your business tools, build the data warehouse, and onboard you and your team to Codex.</p><p class="hero-detail">Investigate changes in performance. Inspect the records behind the answer. Prepare the work for your next decision.</p><div class="actions"><a class="button" href="#example">Explore a business review</a><a class="text-link" href="#foundation">See what we implement</a></div></div>
+ <aside class="example-card" aria-label="Example business question"><p class="card-label">A question from your next meeting</p><blockquote>“Why did we miss our operating-profit budget?”</blockquote><div class="sample-answer"><span class="sample-label">Fictional example · August 2026</span><p>Start with a <strong>$230,000 shortfall.</strong><br>Trace it to the offices and costs behind it.</p><a href="#example">Inspect the example</a></div><p class="card-foot">A modeled warehouse gives the agent a defined place to investigate.</p></aside>
+</section>
+<section id="foundation" class="foundation">
+ <div class="section-heading"><h2>The warehouse is the foundation.</h2><p>Our expertise is structuring business data for AI agents. We establish the connections, definitions, and checks that make the answers inspectable.</p></div>
+ <div class="architecture" aria-label="Implementation sequence">
+  <article><span>1. Business tools</span><h3>Connect the sources.</h3><p>Bring the agreed financial, operational, and workforce records into a company-owned environment.</p></article>
+  <article class="warehouse"><span>2. Data warehouse</span><h3>Model the business.</h3><p>Preserve source records. Resolve keys and reporting periods. Reconcile the metrics and document their definitions.</p></article>
+  <article><span>3. AI agent</span><h3>Give it a defined scope.</h3><p>Configure Codex to work with approved data views and show the evidence behind its findings.</p></article>
+  <article><span>4. Your team</span><h3>Learn on real work.</h3><p>Start with the executive, then onboard included team members to workflows and permissions appropriate to their roles.</p></article>
+ </div>
+ <p class="fine">Connections, history, refresh cadence, modeled outputs, and onboarding are defined in your implementation scope. Access controls and human review remain part of the work.</p>
+</section>
+<section id="example" class="demo">
+ <div class="section-heading"><h2>Follow one question through the data.</h2><p>Harborline Advisory is a fictional services company. This interactive example uses a locally modeled warehouse. It is a calculated demonstration, not a live AI chat.</p></div>
+ <div class="demo-toolbar"><div><label for="month">Reporting month</label><select id="month"><option value="2026-08">August 2026</option><option value="2026-07">July 2026</option></select></div><div><label for="office">Office</label><select id="office"><option value="Company">Company total</option><option>North</option><option>Central</option><option>South</option></select></div><a href="outputs/executive-ai-20260904/harborline-review.xlsx" download class="download">Download the August workbook</a></div>
+ <div id="demo-error" role="alert" hidden></div>
+ <div id="demo-output" aria-live="polite" aria-atomic="true"><p>Loading the calculated example…</p></div>
+ <noscript><p>JavaScript is required for filters and drilldowns. The source files and briefing remain available below.</p></noscript>
+ <details class="source-details"><summary>Inspect the underlying source rows</summary><p>Finance records from the local warehouse. USD. Expenses are stored as positive values.</p><div class="table-scroll"><table><caption id="source-caption">Selected finance source records</caption><thead><tr><th>Row ID</th><th>Office</th><th>Metric</th><th>Actual</th><th>Budget</th></tr></thead><tbody id="source-rows"></tbody></table></div></details>
+ <details class="source-details"><summary>Inspect the warehouse model</summary><div class="model"><div><h3>Preserved source records</h3><p>24 accounting records and 3 workforce records. Source IDs survive ingestion.</p></div><div><h3>Modeled finance and workforce</h3><p>Finance is aggregated by month and office before joining workforce. This avoids multiplying financial amounts.</p></div><div><h3>Agent operating view</h3><p>Six office-month rows. July workforce remains missing, not zero. Company totals tie to independently specified controls.</p></div></div><p class="fine">SQLite demonstrates the layers locally. This example does not include live APIs, a deployed cloud warehouse, production permissions, or scheduled refreshes.</p><a href="demo/outputs/lineage.json" download>Download source lineage</a> <a href="demo/outputs/harborline-demo.sqlite" download>Download the sample warehouse</a></details>
+ <div class="demo-links"><a href="demo/outputs/management-brief.md" download>Download the draft briefing</a><a href="demo/source/financials.json" download>Download fictional accounting inputs</a></div>
+</section>
+<section class="engagement" id="engagement"><div><h2>Implementation shaped around your business.</h2><p>We scope the warehouse, the tools you need connected, and the team members who need onboarding. You work directly with Landon Colvig.</p><p>Begin with an agreed business question. Build the data foundation and workflow. Then rehearse it on a new reporting period.</p></div><div class="deliverables"><h3>What the scope covers</h3><ul><li>Source connections and historical data requirements</li><li>Warehouse models, definitions, and reconciliation checks</li><li>Approved agent access and output-verification practices</li><li>Executive and team onboarding</li><li>Documentation and agreed operating support</li></ul><p class="fine">Additional software, integrations, and onboarding can be added through an approved scope change. No accounting-system posting or external actions are enabled by default.</p></div></section>
+<section id="scope" class="scope"><div><h2>Scope your AI implementation.</h2><p>Tell us which business tools you use and who needs to work with the agent. We’ll define the warehouse and onboarding requirements with you.</p><p class="fine">Keep confidential reports, credentials, and personal data out of the inquiry.</p></div>
+<form id="scope-form"><p class="preview-label">Inquiry preview only. Nothing is saved or sent.</p><div class="form-grid"><label>Name<input name="name" autocomplete="name" required maxlength="100"></label><label>Work email<input name="email" type="email" autocomplete="email" required maxlength="254"></label><label>Company<input name="company" autocomplete="organization" required maxlength="150"></label><label>Role<select name="role" required><option value="">Select role</option><option>CFO / finance leader</option><option>COO / operations leader</option><option>Other executive</option></select></label><label>Revenue band<select name="revenue" required><option value="">Select range</option><option>Under $30M</option><option>$30–50M</option><option>$50–100M</option><option>Over $100M</option><option>Prefer to discuss</option></select></label><label>People to onboard<input name="users" type="number" min="1" max="100000" step="1" required></label></div><label>Business tools to connect<textarea name="tools" rows="2" required maxlength="1000" placeholder="Accounting, CRM, operations, HR, or other systems"></textarea></label><label>First question you want to answer<textarea name="question" rows="2" required maxlength="1000"></textarea></label><button class="button" type="submit">Preview the inquiry</button><p id="form-result" role="status"></p></form>
+</section>
+</main>
+<footer><span class="wordmark">Dayta.</span><p>Business tools. A data warehouse built for agents. People who know how to use it.</p><p class="fine">Codex is an OpenAI product. No affiliation or endorsement is implied.</p></footer>
+</body></html>

@@ -33,6 +33,16 @@ DAYTA-4 + DAYTA-5: needed real Privacy Policy and EULA pages at `daytanalytics.c
 
 ---
 
+## 2026-09-05 - Executive AI page publication
+
+User approved the dedicated /executive-ai/ page while preserving the homepage. Added an explicit whitelist of page assets and fabricated Harborline demonstration downloads. Internal offer, quote scoping, source scripts, and local dependencies are excluded.
+
+Warehouse-first positioning and executive/team onboarding remain central. No public offer prices. Inquiry form remains explicitly non-submitting. No ads, tracking, real connectors, or production warehouse were activated. Page remains noindex until the live lead flow is ready.
+
+Verified local desktop/mobile rendering, month and office filters, source drilldowns, download responses, and zero submission requests. GitHub Pages main/root and daytanalytics.com HTTPS confirmed through API. Homepage checksum before deployment: c787046929bcb1ea1e10fffdf31c67e48ada473d2a0571485220f20b01fbb57f.
+
+Live deployment verification will be recorded in the local executive-AI review bundle after publication.
+
 ## 2026-05-30 15:25 — Built daytanalytics.com Marketing Site + Card Restyle + DNS Cutover
 
 ### Issue / Task

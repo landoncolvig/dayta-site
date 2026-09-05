@@ -1,0 +1,16 @@
+{
+  "fictional": true,
+  "engine": "SQLite local demonstration; no cloud warehouse deployed",
+  "inputHashes": {
+    "controls.json": "4427fcfcbce75a12a331e3b1e33706bd9c912afc408102e2bb078db479281de5",
+    "financials.json": "84bf368ba86e42665c277b56b8b2599c66026a78d236e41a7215cce2c01a3ede",
+    "staffing.json": "b62a2f307e31a69c2877c2e3add11c432e7f519169149d24df62dd0677be49ae"
+  },
+  "rawAccountingRows": 24,
+  "rawWorkforceRows": 3,
+  "agentViewRows": 6,
+  "grain": "one row per month and office",
+  "join": "month + office, after finance aggregation",
+  "missingData": "July workforce is NULL, not zero",
+  "controls": "source/controls.json, independently specified"
+}

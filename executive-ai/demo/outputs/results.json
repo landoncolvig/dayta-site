@@ -1,0 +1,634 @@
+{
+  "fictional": true,
+  "company": "Harborline Advisory",
+  "results": [
+    {
+      "month": "2026-07",
+      "company": {
+        "revenueActual": 3350000,
+        "revenueBudget": 3300000,
+        "expensesActual": 2675000,
+        "expensesBudget": 2640000,
+        "profitActual": 675000,
+        "profitBudget": 660000,
+        "profitVariance": 15000,
+        "marginActual": 0.20149253731343283,
+        "marginBudget": 0.2,
+        "profitVariancePct": 0.022727272727272728,
+        "bridge": [
+          {
+            "metric": "Revenue",
+            "actual": 3350000,
+            "budget": 3300000,
+            "impact": 50000,
+            "sourceIds": [
+              "J-N-R",
+              "J-C-R",
+              "J-S-R"
+            ]
+          },
+          {
+            "metric": "Payroll",
+            "actual": 1600000,
+            "budget": 1600000,
+            "impact": 0,
+            "sourceIds": [
+              "J-N-P",
+              "J-C-P",
+              "J-S-P"
+            ]
+          },
+          {
+            "metric": "Contractors",
+            "actual": 275000,
+            "budget": 250000,
+            "impact": -25000,
+            "sourceIds": [
+              "J-N-C",
+              "J-C-C",
+              "J-S-C"
+            ]
+          },
+          {
+            "metric": "Other operating costs",
+            "actual": 800000,
+            "budget": 790000,
+            "impact": -10000,
+            "sourceIds": [
+              "J-N-O",
+              "J-C-O",
+              "J-S-O"
+            ]
+          }
+        ]
+      },
+      "byOffice": [
+        {
+          "office": "North",
+          "revenueActual": 1450000,
+          "revenueBudget": 1450000,
+          "expensesActual": 1105000,
+          "expensesBudget": 1100000,
+          "profitActual": 345000,
+          "profitBudget": 350000,
+          "profitVariance": -5000,
+          "marginActual": 0.23793103448275862,
+          "marginBudget": 0.2413793103448276,
+          "profitVariancePct": -0.014285714285714285,
+          "bridge": [
+            {
+              "metric": "Revenue",
+              "actual": 1450000,
+              "budget": 1450000,
+              "impact": 0,
+              "sourceIds": [
+                "J-N-R"
+              ]
+            },
+            {
+              "metric": "Payroll",
+              "actual": 695000,
+              "budget": 700000,
+              "impact": 5000,
+              "sourceIds": [
+                "J-N-P"
+              ]
+            },
+            {
+              "metric": "Contractors",
+              "actual": 110000,
+              "budget": 100000,
+              "impact": -10000,
+              "sourceIds": [
+                "J-N-C"
+              ]
+            },
+            {
+              "metric": "Other operating costs",
+              "actual": 300000,
+              "budget": 300000,
+              "impact": 0,
+              "sourceIds": [
+                "J-N-O"
+              ]
+            }
+          ]
+        },
+        {
+          "office": "Central",
+          "revenueActual": 1120000,
+          "revenueBudget": 1050000,
+          "expensesActual": 840000,
+          "expensesBudget": 830000,
+          "profitActual": 280000,
+          "profitBudget": 220000,
+          "profitVariance": 60000,
+          "marginActual": 0.25,
+          "marginBudget": 0.20952380952380953,
+          "profitVariancePct": 0.2727272727272727,
+          "bridge": [
+            {
+              "metric": "Revenue",
+              "actual": 1120000,
+              "budget": 1050000,
+              "impact": 70000,
+              "sourceIds": [
+                "J-C-R"
+              ]
+            },
+            {
+              "metric": "Payroll",
+              "actual": 505000,
+              "budget": 500000,
+              "impact": -5000,
+              "sourceIds": [
+                "J-C-P"
+              ]
+            },
+            {
+              "metric": "Contractors",
+              "actual": 80000,
+              "budget": 80000,
+              "impact": 0,
+              "sourceIds": [
+                "J-C-C"
+              ]
+            },
+            {
+              "metric": "Other operating costs",
+              "actual": 255000,
+              "budget": 250000,
+              "impact": -5000,
+              "sourceIds": [
+                "J-C-O"
+              ]
+            }
+          ]
+        },
+        {
+          "office": "South",
+          "revenueActual": 780000,
+          "revenueBudget": 800000,
+          "expensesActual": 730000,
+          "expensesBudget": 710000,
+          "profitActual": 50000,
+          "profitBudget": 90000,
+          "profitVariance": -40000,
+          "marginActual": 0.0641025641025641,
+          "marginBudget": 0.1125,
+          "profitVariancePct": -0.4444444444444444,
+          "bridge": [
+            {
+              "metric": "Revenue",
+              "actual": 780000,
+              "budget": 800000,
+              "impact": -20000,
+              "sourceIds": [
+                "J-S-R"
+              ]
+            },
+            {
+              "metric": "Payroll",
+              "actual": 400000,
+              "budget": 400000,
+              "impact": 0,
+              "sourceIds": [
+                "J-S-P"
+              ]
+            },
+            {
+              "metric": "Contractors",
+              "actual": 85000,
+              "budget": 70000,
+              "impact": -15000,
+              "sourceIds": [
+                "J-S-C"
+              ]
+            },
+            {
+              "metric": "Other operating costs",
+              "actual": 245000,
+              "budget": 240000,
+              "impact": -5000,
+              "sourceIds": [
+                "J-S-O"
+              ]
+            }
+          ]
+        }
+      ],
+      "source": [
+        {
+          "id": "J-N-R",
+          "month": "2026-07",
+          "office": "North",
+          "metric": "Revenue",
+          "actual": 1450000,
+          "budget": 1450000
+        },
+        {
+          "id": "J-N-P",
+          "month": "2026-07",
+          "office": "North",
+          "metric": "Payroll",
+          "actual": 695000,
+          "budget": 700000
+        },
+        {
+          "id": "J-N-C",
+          "month": "2026-07",
+          "office": "North",
+          "metric": "Contractors",
+          "actual": 110000,
+          "budget": 100000
+        },
+        {
+          "id": "J-N-O",
+          "month": "2026-07",
+          "office": "North",
+          "metric": "Other operating costs",
+          "actual": 300000,
+          "budget": 300000
+        },
+        {
+          "id": "J-C-R",
+          "month": "2026-07",
+          "office": "Central",
+          "metric": "Revenue",
+          "actual": 1120000,
+          "budget": 1050000
+        },
+        {
+          "id": "J-C-P",
+          "month": "2026-07",
+          "office": "Central",
+          "metric": "Payroll",
+          "actual": 505000,
+          "budget": 500000
+        },
+        {
+          "id": "J-C-C",
+          "month": "2026-07",
+          "office": "Central",
+          "metric": "Contractors",
+          "actual": 80000,
+          "budget": 80000
+        },
+        {
+          "id": "J-C-O",
+          "month": "2026-07",
+          "office": "Central",
+          "metric": "Other operating costs",
+          "actual": 255000,
+          "budget": 250000
+        },
+        {
+          "id": "J-S-R",
+          "month": "2026-07",
+          "office": "South",
+          "metric": "Revenue",
+          "actual": 780000,
+          "budget": 800000
+        },
+        {
+          "id": "J-S-P",
+          "month": "2026-07",
+          "office": "South",
+          "metric": "Payroll",
+          "actual": 400000,
+          "budget": 400000
+        },
+        {
+          "id": "J-S-C",
+          "month": "2026-07",
+          "office": "South",
+          "metric": "Contractors",
+          "actual": 85000,
+          "budget": 70000
+        },
+        {
+          "id": "J-S-O",
+          "month": "2026-07",
+          "office": "South",
+          "metric": "Other operating costs",
+          "actual": 245000,
+          "budget": 240000
+        }
+      ]
+    },
+    {
+      "month": "2026-08",
+      "company": {
+        "revenueActual": 3250000,
+        "revenueBudget": 3400000,
+        "expensesActual": 2730000,
+        "expensesBudget": 2650000,
+        "profitActual": 520000,
+        "profitBudget": 750000,
+        "profitVariance": -230000,
+        "marginActual": 0.16,
+        "marginBudget": 0.22058823529411764,
+        "profitVariancePct": -0.30666666666666664,
+        "bridge": [
+          {
+            "metric": "Revenue",
+            "actual": 3250000,
+            "budget": 3400000,
+            "impact": -150000,
+            "sourceIds": [
+              "A-N-R",
+              "A-C-R",
+              "A-S-R"
+            ]
+          },
+          {
+            "metric": "Payroll",
+            "actual": 1630000,
+            "budget": 1600000,
+            "impact": -30000,
+            "sourceIds": [
+              "A-N-P",
+              "A-C-P",
+              "A-S-P"
+            ]
+          },
+          {
+            "metric": "Contractors",
+            "actual": 290000,
+            "budget": 250000,
+            "impact": -40000,
+            "sourceIds": [
+              "A-N-C",
+              "A-C-C",
+              "A-S-C"
+            ]
+          },
+          {
+            "metric": "Other operating costs",
+            "actual": 810000,
+            "budget": 800000,
+            "impact": -10000,
+            "sourceIds": [
+              "A-N-O",
+              "A-C-O",
+              "A-S-O"
+            ]
+          }
+        ]
+      },
+      "byOffice": [
+        {
+          "office": "North",
+          "revenueActual": 1350000,
+          "revenueBudget": 1500000,
+          "expensesActual": 1240000,
+          "expensesBudget": 1100000,
+          "profitActual": 110000,
+          "profitBudget": 400000,
+          "profitVariance": -290000,
+          "marginActual": 0.08148148148148149,
+          "marginBudget": 0.26666666666666666,
+          "profitVariancePct": -0.725,
+          "bridge": [
+            {
+              "metric": "Revenue",
+              "actual": 1350000,
+              "budget": 1500000,
+              "impact": -150000,
+              "sourceIds": [
+                "A-N-R"
+              ]
+            },
+            {
+              "metric": "Payroll",
+              "actual": 720000,
+              "budget": 700000,
+              "impact": -20000,
+              "sourceIds": [
+                "A-N-P"
+              ]
+            },
+            {
+              "metric": "Contractors",
+              "actual": 180000,
+              "budget": 100000,
+              "impact": -80000,
+              "sourceIds": [
+                "A-N-C"
+              ]
+            },
+            {
+              "metric": "Other operating costs",
+              "actual": 340000,
+              "budget": 300000,
+              "impact": -40000,
+              "sourceIds": [
+                "A-N-O"
+              ]
+            }
+          ]
+        },
+        {
+          "office": "Central",
+          "revenueActual": 1150000,
+          "revenueBudget": 1100000,
+          "expensesActual": 815000,
+          "expensesBudget": 830000,
+          "profitActual": 335000,
+          "profitBudget": 270000,
+          "profitVariance": 65000,
+          "marginActual": 0.29130434782608694,
+          "marginBudget": 0.24545454545454545,
+          "profitVariancePct": 0.24074074074074073,
+          "bridge": [
+            {
+              "metric": "Revenue",
+              "actual": 1150000,
+              "budget": 1100000,
+              "impact": 50000,
+              "sourceIds": [
+                "A-C-R"
+              ]
+            },
+            {
+              "metric": "Payroll",
+              "actual": 510000,
+              "budget": 500000,
+              "impact": -10000,
+              "sourceIds": [
+                "A-C-P"
+              ]
+            },
+            {
+              "metric": "Contractors",
+              "actual": 60000,
+              "budget": 80000,
+              "impact": 20000,
+              "sourceIds": [
+                "A-C-C"
+              ]
+            },
+            {
+              "metric": "Other operating costs",
+              "actual": 245000,
+              "budget": 250000,
+              "impact": 5000,
+              "sourceIds": [
+                "A-C-O"
+              ]
+            }
+          ]
+        },
+        {
+          "office": "South",
+          "revenueActual": 750000,
+          "revenueBudget": 800000,
+          "expensesActual": 675000,
+          "expensesBudget": 720000,
+          "profitActual": 75000,
+          "profitBudget": 80000,
+          "profitVariance": -5000,
+          "marginActual": 0.1,
+          "marginBudget": 0.1,
+          "profitVariancePct": -0.0625,
+          "bridge": [
+            {
+              "metric": "Revenue",
+              "actual": 750000,
+              "budget": 800000,
+              "impact": -50000,
+              "sourceIds": [
+                "A-S-R"
+              ]
+            },
+            {
+              "metric": "Payroll",
+              "actual": 400000,
+              "budget": 400000,
+              "impact": 0,
+              "sourceIds": [
+                "A-S-P"
+              ]
+            },
+            {
+              "metric": "Contractors",
+              "actual": 50000,
+              "budget": 70000,
+              "impact": 20000,
+              "sourceIds": [
+                "A-S-C"
+              ]
+            },
+            {
+              "metric": "Other operating costs",
+              "actual": 225000,
+              "budget": 250000,
+              "impact": 25000,
+              "sourceIds": [
+                "A-S-O"
+              ]
+            }
+          ]
+        }
+      ],
+      "source": [
+        {
+          "id": "A-N-R",
+          "month": "2026-08",
+          "office": "North",
+          "metric": "Revenue",
+          "actual": 1350000,
+          "budget": 1500000
+        },
+        {
+          "id": "A-N-P",
+          "month": "2026-08",
+          "office": "North",
+          "metric": "Payroll",
+          "actual": 720000,
+          "budget": 700000
+        },
+        {
+          "id": "A-N-C",
+          "month": "2026-08",
+          "office": "North",
+          "metric": "Contractors",
+          "actual": 180000,
+          "budget": 100000
+        },
+        {
+          "id": "A-N-O",
+          "month": "2026-08",
+          "office": "North",
+          "metric": "Other operating costs",
+          "actual": 340000,
+          "budget": 300000
+        },
+        {
+          "id": "A-C-R",
+          "month": "2026-08",
+          "office": "Central",
+          "metric": "Revenue",
+          "actual": 1150000,
+          "budget": 1100000
+        },
+        {
+          "id": "A-C-P",
+          "month": "2026-08",
+          "office": "Central",
+          "metric": "Payroll",
+          "actual": 510000,
+          "budget": 500000
+        },
+        {
+          "id": "A-C-C",
+          "month": "2026-08",
+          "office": "Central",
+          "metric": "Contractors",
+          "actual": 60000,
+          "budget": 80000
+        },
+        {
+          "id": "A-C-O",
+          "month": "2026-08",
+          "office": "Central",
+          "metric": "Other operating costs",
+          "actual": 245000,
+          "budget": 250000
+        },
+        {
+          "id": "A-S-R",
+          "month": "2026-08",
+          "office": "South",
+          "metric": "Revenue",
+          "actual": 750000,
+          "budget": 800000
+        },
+        {
+          "id": "A-S-P",
+          "month": "2026-08",
+          "office": "South",
+          "metric": "Payroll",
+          "actual": 400000,
+          "budget": 400000
+        },
+        {
+          "id": "A-S-C",
+          "month": "2026-08",
+          "office": "South",
+          "metric": "Contractors",
+          "actual": 50000,
+          "budget": 70000
+        },
+        {
+          "id": "A-S-O",
+          "month": "2026-08",
+          "office": "South",
+          "metric": "Other operating costs",
+          "actual": 225000,
+          "budget": 250000
+        }
+      ]
+    }
+  ]
+}
