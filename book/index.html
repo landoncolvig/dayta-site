@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,follow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#f4eddc">
+  <title>Book a conversation with Landon | Dayta</title>
+  <meta name="description" content="Choose a time to talk with Landon Colvig about your data and AI work.">
+  <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/book/styles.css">
+  <script src="/book/config.js" defer></script>
+  <script src="/book/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#booking">Skip to booking</a>
+  <header class="site-header">
+    <a class="wordmark" href="/" aria-label="Dayta home">Dayta.</a>
+    <a class="header-link" href="mailto:landon@daytanalytics.com">Email Landon <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="booking" class="layout">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">DAYTA / SCHEDULE A CONVERSATION</p>
+      <h1 id="page-title">Let’s find a time to talk.</h1>
+      <p class="lead">Choose a meeting and a time that works for you. You’ll receive a calendar invitation after booking.</p>
+      <div class="host">
+        <img src="/founder.jpg" alt="Landon Colvig" width="68" height="68">
+        <div><strong>Landon Colvig</strong><span>Founder, Dayta Analytics</span></div>
+      </div>
+      <div class="details">
+        <p><span class="detail-number">01</span> Select a meeting</p>
+        <p><span class="detail-number">02</span> Choose an open time</p>
+        <p><span class="detail-number">03</span> Confirm your details</p>
+      </div>
+    </section>
+    <section class="booking-card" aria-label="Book a meeting">
+      <div id="loading" class="loading" role="status">Loading available times…</div>
+      <div id="booking-ui" hidden>
+        <div class="card-head"><span class="step">01 / MEETING</span><span id="duration"></span></div>
+        <h2 id="meeting-heading">Choose a meeting</h2>
+        <p id="meeting-description" class="muted"></p>
+        <div id="type-picker" class="type-picker" role="group" aria-label="Meeting type"></div>
+        <div class="separator"></div>
+        <div class="card-head"><span class="step">02 / TIME</span><span id="timezone"></span></div>
+        <h2>Choose an open time</h2>
+        <p class="muted">Times are shown in your time zone. Meetings are hosted on Google Meet.</p>
+        <div id="dates" class="dates" role="group" aria-label="Available dates"></div>
+        <button id="more-dates" class="more-dates" type="button" hidden>Show more dates <span aria-hidden="true">→</span></button>
+        <div id="times" class="times" role="group" aria-label="Available times"></div>
+        <p id="availability-status" class="status" role="status"></p>
+        <form id="booking-form" hidden>
+          <div class="separator"></div>
+          <span class="step">03 / YOUR DETAILS</span>
+          <h2>Confirm your meeting</h2>
+          <p id="selection-summary" class="selection-summary"></p>
+          <div class="fields">
+            <label>Your name<input name="name" autocomplete="name" maxlength="100" required></label>
+            <label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
+          </div>
+          <label>Anything Landon should know? <span class="optional">Optional</span><textarea name="notes" rows="3" maxlength="1000"></textarea></label>
+          <div class="honeypot" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <div id="recaptcha" class="verification"></div>
+          <button id="submit" type="submit">Book this time <span aria-hidden="true">↗</span></button>
+          <p class="fine">By booking, you agree to receive a calendar invitation and meeting updates. See our <a href="/privacy/">privacy policy</a>.</p>
+          <p id="form-status" class="status" role="status"></p>
+        </form>
+      </div>
+      <div id="confirmation" class="confirmation" hidden tabindex="-1">
+        <span class="step">MEETING BOOKED</span>
+        <h2>You’re on the calendar.</h2>
+        <p id="confirmation-time"></p>
+        <p>A calendar invitation and Google Meet details will arrive by email. Please check your spam folder if you don’t see it. To change the time, reply to the invitation or email Landon.</p>
+        <a class="secondary-link" href="/">Return to Dayta <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+  <footer><span>© Dayta Analytics</span><span><a href="/privacy/">Privacy</a> · <a href="mailto:landon@daytanalytics.com">Contact</a></span></footer>
+</body>
+</html>
