@@ -163,3 +163,23 @@ Landon asked for a design audit of daytanalytics.com with UI improvement suggest
 - lsa_action_agent.py: proper fix is parameterized BQ queries (flagged, not refactored)
 
 ---
+## 2026-09-26 - Dayta booking page and calendar API staged
+
+### Issue
+Dayta's scheduling link opened TidyCal. The static site could not safely use Landon's Google Calendar refresh token in browser code.
+
+### Actions taken
+- Added `/book/` with Dayta styling, local time display, 60-day availability, a booking form, and reCAPTCHA.
+- Added `booking-api/` for Google Calendar free/busy checks and attendee events. Stored OAuth and reCAPTCHA secrets in Secret Manager. Deployed Cloud Run with a dedicated service account, one instance, and one concurrent request.
+- Kept the existing TidyCal links in place while the public form awaits its final booking check.
+
+### Verification
+- Nine API tests pass. The live API returns slots from the primary calendar. Desktop and 390px page views render correctly.
+- A controlled booking using the real calendar token created an event at the selected time with an attendee and Google Meet link. The test event was deleted.
+- GitHub Pages serves `/book/`; Cloud Run revision `dayta-booking-api-00002-nzc` serves all traffic. The live reCAPTCHA checkbox renders.
+
+### Outstanding
+- Complete a public-form test after CAPTCHA confirmation, then replace the existing scheduling links.
+- Landon has not yet chosen whether to expose the other TidyCal meeting types or add self-service cancellation and rescheduling.
+
+---
