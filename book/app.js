@@ -28,11 +28,12 @@
   function loadRecaptcha() {
     if (!recaptchaSiteKey) return Promise.resolve();
     if (!recaptchaLoader) recaptchaLoader = new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject(new Error('Verification could not load. Please refresh and try again.')), 10_000);
+      window.daytaRecaptchaReady = () => { clearTimeout(timeout); resolve(); };
       const script = document.createElement('script');
-      script.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
+      script.src = 'https://www.google.com/recaptcha/api.js?onload=daytaRecaptchaReady&render=explicit';
       script.async = true;
-      script.onload = resolve;
-      script.onerror = () => reject(new Error('Verification could not load. Please refresh and try again.'));
+      script.onerror = () => { clearTimeout(timeout); reject(new Error('Verification could not load. Please refresh and try again.')); };
       document.head.append(script);
     });
     return recaptchaLoader.then(() => {
