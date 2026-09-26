@@ -193,11 +193,18 @@
     try {
       const result = await request(`/api/slots?type=${encodeURIComponent(selectedType)}&after=${after}`);
       if (generation !== requestGeneration) return;
-      slots.push(...(result.slots || []));
+      const addedSlots = result.slots || [];
+      slots.push(...addedSlots);
+      if (addedSlots.length) {
+        selectedDate = localDay(addedSlots[0]);
+        selectedSlot = '';
+        bookingKey = '';
+        elements['booking-form'].hidden = true;
+      }
       nextDate = result.nextDate || null;
       elements['availability-status'].textContent = '';
       renderDates();
-      elements.dates.scrollLeft = elements.dates.scrollWidth;
+      elements.dates.querySelector('button[aria-pressed="true"]')?.scrollIntoView({ inline: 'start', block: 'nearest' });
     } catch (error) {
       elements['availability-status'].textContent = error.message;
     } finally {
