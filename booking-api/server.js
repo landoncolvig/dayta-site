@@ -49,7 +49,7 @@ async function readJson(request) {
   let size = 0;
   for await (const chunk of request) {
     size += chunk.length;
-    if (size > 8192) throw Object.assign(new Error('Request too large'), { status: 413 });
+    if (size > 16_384) throw Object.assign(new Error('Request too large'), { status: 413 });
     chunks.push(chunk);
   }
   try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); }
@@ -90,9 +90,14 @@ function bookingEnabled() {
     (Boolean(process.env.RECAPTCHA_SECRET_KEY && process.env.RECAPTCHA_SITE_KEY) || process.env.NODE_ENV !== 'production');
 }
 
-async function verifyHuman(token) {
+export async function verifyHuman(token) {
   if (!process.env.RECAPTCHA_SECRET_KEY) return process.env.NODE_ENV !== 'production';
-  if (typeof token !== 'string' || !token || token.length > 2048) return false;
+  // Current checkbox responses can exceed 2 KB. Keep a bounded request while
+  // allowing Google, rather than an obsolete length assumption, to verify them.
+  if (typeof token !== 'string' || !token || token.length > 8192) {
+    console.warn('reCAPTCHA input rejected', { tokenLength: typeof token === 'string' ? token.length : null });
+    return false;
+  }
   const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
     method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({ secret: process.env.RECAPTCHA_SECRET_KEY, response: token }),
@@ -100,7 +105,11 @@ async function verifyHuman(token) {
   });
   if (!response.ok) throw new Error(`Verification service failed: ${response.status}`);
   const result = await response.json();
-  return result.success === true && ['daytanalytics.com', 'www.daytanalytics.com'].includes(result.hostname);
+  const valid = result.success === true && ['daytanalytics.com', 'www.daytanalytics.com'].includes(result.hostname);
+  if (!valid) console.warn('reCAPTCHA verification rejected', {
+    success: result.success === true, hostname: result.hostname || null, errorCodes: result['error-codes'] || []
+  });
+  return valid;
 }
 
 export function createServer({ calendar = google, now = () => new Date() } = {}) {

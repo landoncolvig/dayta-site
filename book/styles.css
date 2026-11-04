@@ -14,4 +14,5 @@ footer>span:first-child{display:block}footer #year{display:inline}footer>span:la
 .nav-logo{text-decoration:none;display:flex;align-items:center}.nav-logo .wordmark{font:400 30px/1 'Fraunces','Times New Roman',serif;letter-spacing:-.035em}.status[data-loading=true]{color:var(--muted)}
 .nav-logo{height:30px}.nav-logo .wordmark{font-variation-settings:'opsz' 144,'SOFT' 30,'wght' 600}
 :root{--display:'Fraunces','Times New Roman',serif;--body:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;--mono:'IBM Plex Mono','SF Mono',Menlo,monospace}.intro h1,.booking-card h2{font-variation-settings:'opsz' 144,'SOFT' 30,'wght' 400}
+#confirmation-email{overflow-wrap:anywhere}
 @media(max-width:560px){.host{border-top:0;margin-top:20px;padding-top:0}.lead{font-size:15px}.meeting-facts{margin-top:16px}}

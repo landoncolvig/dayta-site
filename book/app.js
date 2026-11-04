@@ -67,6 +67,7 @@
       if (recaptchaWidget === null) recaptchaWidget = window.grecaptcha.render('recaptcha', {
         sitekey: recaptchaSiteKey,
         size: el['booking-form'].clientWidth < 304 ? 'compact' : 'normal',
+        callback: () => { el['form-status'].textContent = ''; },
         'expired-callback': () => { el['form-status'].textContent = 'Verification expired. Please complete it again.'; },
         'error-callback': () => { el['form-status'].textContent = 'Verification could not connect. Please try again or email Landon.'; }
       });
