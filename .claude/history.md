@@ -183,3 +183,29 @@ Dayta's scheduling link opened TidyCal. The static site could not safely use Lan
 - Landon has not yet chosen whether to expose the other TidyCal meeting types or add self-service cancellation and rescheduling.
 
 ---
+
+## 2026-11-04 - Dayta booking UI, public-form verification and default-link cutover
+
+### Request and implementation
+Landon requested full testing, a professional and easy-to-use booking page matching the website's fonts and logo, and use of the Dayta URL as the default instead of TidyCal. Replaced the horizontal date strip with a month calendar, explicit time-zone selection, a focused details step, change-time navigation, and clear confirmation. Preserved 30-minute weekday meetings and the existing calendar policy. Matched the homepage's variable Fraunces, IBM Plex Sans, IBM Plex Mono, cream/ink palette, and exact Dayta wordmark markup/axes. Improved phone inputs, compact CAPTCHA rendering, loading/error states and contact-detail preservation after conflicts.
+
+### Proven failures and repairs
+- The booking handler returned its serialization promise without awaiting it inside the error boundary. New regressions reproduced uncaught malformed-JSON and upstream-provider errors. Awaiting that operation now returns controlled errors and frees the queue.
+- The first real public-form attempt failed despite a green CAPTCHA. The site registration and stored legacy secret matched. The API rejected responses longer than 2048 characters before contacting Google. A new regression reproduced this; the successful live retry's token was 2382 characters. Increased the bounded token allowance to 8192 characters and body allowance to 16384 bytes while retaining Google's success check, hostname restrictions, and rejection of bad tokens. Logs contain diagnostic metadata only, never tokens or secrets. No credentials were rotated or written to disk.
+
+### Verification and cleanup
+- All 13 local API tests pass, including conflicts, idempotent retries, simultaneous requests, daylight saving time and new error/token regressions. Deployed checks confirmed guarded invalid inputs, origins and dates, oversized-body rejection, Google rejection of a long invalid token, and healthy service responses.
+- Public-form booking succeeded at 18:14:52 UTC for November 5, 09:00–09:30 America/Chicago. Exactly one matching event appeared on Landon's primary calendar: `db89b8a10b9329ff7ed3409de05845c7e92f593ab`. Intended attendee was Landon's own Gmail plus alias. The event had a Google Meet link. Gmail readback of `1a1a7c561052b2cc` verified Delivered-To, Inbox receipt, matching times/Meet link, and a calendar attachment.
+- The real booking removed both the booked 09:00 start and overlapping 09:15 start from availability. Deleted only the controlled event, then verified zero matching QA events and restoration of both starts. No client or other invitee was contacted. The test invitation remains as receipt evidence in Landon's own mailbox.
+- Chrome checks at 320, 390, 768, 1024 and 1440px showed no horizontal overflow. Tested month limits, Eastern and Tokyo conversions including next-day rollover, validation, mock success/failure/conflict recovery, live confirmation, and the live compact CAPTCHA on a 262px form. Physical devices and Safari were not tested.
+
+### Release and durable state
+- Source changes pushed to `landoncolvig/dayta-site` main as `040667c` and `8e67d88`; GitHub Pages builds succeeded. Corrected Cloud Run revision `dayta-booking-api-00005-cev` serves 100% traffic; temporary verification tags removed. Retained the existing attached service account, Secret Manager references, one-instance limit, concurrency and origin policy.
+- After the public-form check, switched the executive-AI confirmation and thanks-page buttons from TidyCal to `/book/` and updated their instructions. Historical booking links and the legacy-provider privacy disclosure remain appropriate for existing TidyCal bookings.
+- Saved default `https://daytanalytics.com/book/` in versioned global working agreements, installed through codex-config.py with zero drift, and verified configuration remote commit `66861c0a9`. Added the explicitly requested preference note under Codex memory extensions. Did not alter sent messages or existing drafts.
+- Evidence and screenshots: `/Users/qb/Documents/Codex/2026-11-04/have-x20/work/booking-test-20261104/` and that chat's `outputs/`. Updated `ISA.md` with accepted requirements and completed criteria.
+
+### Remaining scope
+No blocker remains for this 30-minute booking flow. Other meeting types and self-service cancellation/rescheduling are outside this release; the page directs visitors to reply to the invitation or email Landon for changes. Calendar invite receipt was proven at Landon's own Gmail alias; delivery to other providers was not tested. No promise of universal mailbox delivery or physical-device/browser coverage is made.
+
+---
