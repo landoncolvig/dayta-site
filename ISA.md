@@ -37,6 +37,14 @@ Build a Dayta-branded booking page backed by Landon's Google Calendar. Release i
 - [x] ISC-10: Anti: the public API does not expose calendar event details.
 - [x] ISC-11: Anti: the public API does not accept an unlisted booking type.
 - [ ] ISC-12: The live booking flow passes an end-to-end check before old links change.
+- [ ] ISC-13: The page uses the homepage's Fraunces, IBM Plex Sans, IBM Plex Mono, palette and exact Dayta wordmark settings.
+- [ ] ISC-14: A month calendar and explicit time-zone selector make all available dates within the current 60-day horizon browsable.
+- [ ] ISC-15: Date selection, details, errors and confirmation fit 320px and 390px phone layouts without horizontal overflow.
+- [ ] ISC-16: Invalid input and upstream errors return controlled responses; conflicts preserve entered contact details and offer another time.
+
+## Accepted requirements, November 4, 2026
+
+Landon requested full live testing and a professional, easy-to-use UI matching the rest of his website, including the same fonts and logo. He explicitly chose `https://daytanalytics.com/book/` as his default scheduling link instead of TidyCal. Use a controlled booking to Landon's own email for the live check, inspect the calendar invitation and Meet link, then remove the test event. Public-form CAPTCHA confirmation remains required at action time.
 
 ## Test Strategy
 

@@ -110,3 +110,31 @@ test('public booking remains closed until release is enabled', async () => {
     assert.equal(calendar.events.size, 0);
   }, '0');
 });
+
+test('malformed JSON returns a client error and the service stays healthy', async () => {
+  await withServer(async base => {
+    const response = await fetch(`${base}/api/book`, {
+      method: 'POST', headers: { 'content-type': 'application/json', origin: ORIGIN },
+      body: '{', signal: AbortSignal.timeout(1000)
+    });
+    assert.equal(response.status, 400);
+    assert.equal((await response.json()).error, 'Invalid JSON');
+    assert.equal((await fetch(`${base}/health`)).status, 200);
+  });
+});
+
+test('an upstream booking failure returns a safe error and releases the queue', async () => {
+  await withServer(async (base, calendar) => {
+    const input = booking({ email: 'recovery@example.com' });
+    const getEvent = calendar.getEvent;
+    calendar.getEvent = async () => { throw new Error('Private provider diagnostic'); };
+    const response = await fetch(`${base}/api/book`, {
+      method: 'POST', headers: { 'content-type': 'application/json', origin: ORIGIN },
+      body: JSON.stringify(input), signal: AbortSignal.timeout(1000)
+    });
+    assert.equal(response.status, 502);
+    assert.deepEqual(await response.json(), { error: 'Booking service is temporarily unavailable' });
+    calendar.getEvent = getEvent;
+    assert.equal((await post(base, input)).status, 201);
+  });
+});

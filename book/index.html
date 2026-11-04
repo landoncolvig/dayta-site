@@ -7,74 +7,94 @@
   <meta name="referrer" content="no-referrer">
   <meta name="theme-color" content="#f4eddc">
   <title>Book a conversation with Landon | Dayta</title>
-  <meta name="description" content="Choose a time to talk with Landon Colvig about your data and AI work.">
+  <meta name="description" content="Choose a time to meet with Landon Colvig. A 30-minute conversation on Google Meet, with a calendar invitation sent straight to your inbox.">
   <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/book/styles.css">
+  <link rel="stylesheet" href="/book/styles.css?v=20261104">
   <script src="/book/config.js" defer></script>
-  <script src="/book/app.js?v=3" defer></script>
+  <script src="/book/app.js?v=20261104" defer></script>
 </head>
 <body>
   <a class="skip" href="#booking">Skip to booking</a>
   <header class="site-header">
-    <a class="wordmark" href="/" aria-label="Dayta home">Dayta.</a>
+    <a class="nav-logo" href="/" aria-label="Dayta Analytics"><span class="wordmark">Dayta.</span></a>
     <a class="header-link" href="mailto:landon@daytanalytics.com">Email Landon <span aria-hidden="true">↗</span></a>
   </header>
   <main id="booking" class="layout">
     <section class="intro" aria-labelledby="page-title">
-      <p class="eyebrow">DAYTA / SCHEDULE A CONVERSATION</p>
+      <p class="eyebrow">Schedule a conversation</p>
       <h1 id="page-title">Let’s find a time to talk.</h1>
-      <p class="lead">Choose a meeting and a time that works for you. You’ll receive a calendar invitation after booking.</p>
+      <p class="lead">Choose a time that works for you. We’ll meet on Google Meet, and the invitation will go straight to your inbox.</p>
       <div class="host">
-        <img src="/founder.jpg" alt="Landon Colvig" width="68" height="68">
+        <img src="/founder.jpg" alt="Landon Colvig" width="56" height="56">
         <div><strong>Landon Colvig</strong><span>Founder, Dayta Analytics</span></div>
       </div>
-      <div class="details">
-        <p><span class="detail-number">01</span> Select a meeting</p>
-        <p><span class="detail-number">02</span> Choose an open time</p>
-        <p><span class="detail-number">03</span> Confirm your details</p>
-      </div>
+      <ul class="meeting-facts" aria-label="Meeting details">
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 5.5V10l3 2"/></svg><span id="duration">30 minutes</span></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="4.5" width="10.5" height="11" rx="1"/><path d="m12.5 8 5-3v10l-5-3"/></svg>Google Meet</li>
+      </ul>
+      <p class="intro-help">Can’t find a time that works?<br><a href="mailto:landon@daytanalytics.com">Email Landon to arrange a time.</a></p>
     </section>
     <section class="booking-card" aria-label="Book a meeting">
-      <div id="loading" class="loading" role="status">Loading available times…</div>
+      <div id="loading" class="loading" role="status">Checking the calendar for open times…</div>
+      <noscript><p>Enable JavaScript to see available times, or <a href="mailto:landon@daytanalytics.com">email Landon to schedule</a>.</p></noscript>
       <div id="booking-ui" hidden>
-        <div class="card-head"><span class="step">01 / MEETING</span><span id="duration"></span></div>
-        <h2 id="meeting-heading">Choose a meeting</h2>
-        <p id="meeting-description" class="muted"></p>
-        <div id="type-picker" class="type-picker" role="group" aria-label="Meeting type"></div>
-        <div class="separator"></div>
-        <div class="card-head"><span class="step">02 / TIME</span><span id="timezone"></span></div>
-        <h2>Choose an open time</h2>
-        <p class="muted">Times are shown in your time zone. Meetings are hosted on Google Meet.</p>
-        <div id="dates" class="dates" role="group" aria-label="Available dates"></div>
-        <button id="more-dates" class="more-dates" type="button" hidden>Show more dates <span aria-hidden="true">→</span></button>
-        <div id="times" class="times" role="group" aria-label="Available times"></div>
-        <p id="availability-status" class="status" role="status"></p>
+        <div class="card-head">
+          <span class="step" id="meeting-heading">Meeting with Landon</span>
+          <nav class="progress" aria-label="Booking progress"><span id="time-step" aria-current="step">1. Time</span><span class="progress-line" aria-hidden="true"></span><span id="details-step">2. Details</span></nav>
+        </div>
+        <div id="type-picker" class="type-picker" role="group" aria-label="Meeting type" hidden></div>
+        <div id="time-picker">
+          <h2>Choose a date &amp; time.</h2>
+          <p class="muted">Only available times are shown, in your time zone.</p>
+          <div class="calendar-layout">
+            <div class="calendar-panel">
+              <div class="calendar-toolbar">
+                <h3 id="month-heading" aria-live="polite"></h3>
+                <div class="month-controls"><button id="previous-month" class="icon-button" type="button" aria-label="Previous month">‹</button><button id="next-month" class="icon-button" type="button" aria-label="Next month">›</button></div>
+              </div>
+              <div id="weekdays" class="weekdays" aria-hidden="true"></div>
+              <div id="dates" class="dates" role="group" aria-label="Available dates"></div>
+              <p class="calendar-caption">Select a highlighted date to see open times.</p>
+            </div>
+            <div class="times-panel">
+              <h3 id="times-heading" class="times-heading"></h3>
+              <div id="times" class="times" role="group" aria-label="Available times"></div>
+            </div>
+          </div>
+          <div class="timezone-row">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8"/><ellipse cx="10" cy="10" rx="3.5" ry="8"/><path d="M2 10h16"/></svg>
+            <label for="timezone">Time zone</label><select id="timezone" aria-label="Time zone"></select>
+          </div>
+          <p id="availability-status" class="status" role="status"></p>
+        </div>
         <form id="booking-form" hidden>
-          <div class="separator"></div>
-          <span class="step">03 / YOUR DETAILS</span>
-          <h2>Confirm your meeting</h2>
-          <p id="selection-summary" class="selection-summary"></p>
+          <button id="change-time" class="back-button" type="button">← Change date or time</button>
+          <h2>Your meeting details.</h2>
+          <p class="muted">Where should we send your calendar invitation?</p>
+          <div id="selection-summary" class="selection-summary"></div>
           <div class="fields">
             <label>Your name<input name="name" autocomplete="name" maxlength="100" required></label>
             <label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
           </div>
-          <label>Anything Landon should know? <span class="optional">Optional</span><textarea name="notes" rows="3" maxlength="1000"></textarea></label>
+          <label>What would you like to discuss? <span class="optional">Optional</span><textarea name="notes" rows="3" maxlength="1000"></textarea></label>
           <div class="honeypot" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
           <div id="recaptcha" class="verification"></div>
-          <button id="submit" type="submit">Book this time <span aria-hidden="true">↗</span></button>
-          <p class="fine">By booking, you agree to receive a calendar invitation and meeting updates. See our <a href="/privacy/">privacy policy</a>.</p>
-          <p id="form-status" class="status" role="status"></p>
+          <p id="form-status" class="status" role="alert"></p>
+          <button id="submit" class="primary-button" type="submit">Confirm meeting <span aria-hidden="true">→</span></button>
+          <p class="fine">You’ll receive a calendar invitation with a Google Meet link. To change or cancel, reply to the invitation or email Landon. <a href="/privacy/">Privacy policy</a>.</p>
         </form>
       </div>
       <div id="confirmation" class="confirmation" hidden tabindex="-1">
-        <span class="step">MEETING BOOKED</span>
+        <div class="confirmation-mark" aria-hidden="true">✓</div>
+        <span class="step">Meeting confirmed</span>
         <h2>You’re on the calendar.</h2>
-        <p id="confirmation-time"></p>
-        <p>A calendar invitation and Google Meet details will arrive by email. Please check your spam folder if you don’t see it. To change the time, reply to the invitation or email Landon.</p>
+        <div id="confirmation-time" class="selection-summary"></div>
+        <p id="confirmation-email"></p>
+        <p>Your invitation includes the Google Meet link. If it doesn’t arrive, check spam or <a href="mailto:landon@daytanalytics.com">email Landon</a>. To change or cancel, reply to the invitation.</p>
         <a class="secondary-link" href="/">Return to Dayta <span aria-hidden="true">↗</span></a>
       </div>
     </section>
   </main>
-  <footer><span>© Dayta Analytics</span><span><a href="/privacy/">Privacy</a> · <a href="mailto:landon@daytanalytics.com">Contact</a></span></footer>
+  <footer><span>© <span id="year">2026</span> Dayta Analytics LLC</span><span><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="mailto:landon@daytanalytics.com">Contact</a></span></footer>
 </body>
 </html>

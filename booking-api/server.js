@@ -138,7 +138,7 @@ export function createServer({ calendar = google, now = () => new Date() } = {})
         const nextDate = addDays(last, 1) <= horizon ? addDays(last, 1) : null;
         return json(response, 200, { slots, nextDate }, origin);
       }
-      if (request.method === 'POST' && path === '/api/book') return serializeBooking(async () => {
+      if (request.method === 'POST' && path === '/api/book') return await serializeBooking(async () => {
         if (!origin) return json(response, 403, { error: 'Invalid origin' });
         if (!bookingEnabled()) return json(response, 503, { error: 'Booking is not open yet' }, origin);
         const body = await readJson(request);
