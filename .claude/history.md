@@ -209,3 +209,10 @@ Landon requested full testing, a professional and easy-to-use booking page match
 No blocker remains for this 30-minute booking flow. Other meeting types and self-service cancellation/rescheduling are outside this release; the page directs visitors to reply to the invitation or email Landon for changes. Calendar invite receipt was proven at Landon's own Gmail alias; delivery to other providers was not tested. No promise of universal mailbox delivery or physical-device/browser coverage is made.
 
 ---
+
+
+## 2026-11-09 - Approved integration credential storage disclosure correction
+
+- Landon explicitly approved replacing the privacy policy's inaccurate statement that all OAuth/API credentials are in Google Secret Manager with the factual managed-secret-store or access-restricted-configuration wording. Updated the effective date to November 9, 2026. No other policy or page wording changed.
+- Fresh public privacy HTML matched origin/main exactly before editing. Diff check passed. This correction supports publication of the existing Dayta Google Ads OAuth app and BAC recovery; it does not assert Google brand/scope verification or change any client integration permissions.
+- Source prepared in an isolated worktree; unrelated main checkout history/banner edits preserved. Deployment is the existing GitHub Pages main-branch flow. Live byte verification follows the push. BAC recovery checkpoint: /Users/qb/work/bac-google-ads-recovery-20261109/checkpoint.md.
